@@ -1,0 +1,7 @@
+###########################################
+### MANAGED BY PUPPET ['secc_os_linux'] ###
+###     DON'T CHANGE THIS FILE HERE     ###
+###      DO IT ON THE PUPPET MASTER!    ###
+###########################################
+
+echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}"; echo -ne "\007";logger -p local6.warn -t audit $$ $USER "$(history 1)"; history -a
