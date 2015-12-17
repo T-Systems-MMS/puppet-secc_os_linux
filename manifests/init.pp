@@ -1,6 +1,8 @@
 # SecC Linux OS Hardening
 class secc_os_linux {
 
+  include secc_os_linux::arpwatch
+
   include secc_os_linux::audit
 
   include secc_os_linux::inputrc

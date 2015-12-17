@@ -1,4 +1,4 @@
-class arpwatch {
+class secc_os_linux::arpwatch {
 
   # arpwatch to watch for arp spoofing
   package { 'arpwatch':
@@ -18,6 +18,7 @@ class arpwatch {
 	    group  => 'root',
 	    mode   => '0644',
 	    source => 'puppet:///modules/secc_os_linux/etc/sysconfig/arpwatch',
+	    notify => Service['arpwatch'],
 	  }
 
   }
