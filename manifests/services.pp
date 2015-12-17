@@ -51,12 +51,13 @@ class secc_os_linux::services {
 
 
   # own handling of alsa-firmware, because dependency between those package have to be removed "yum -y erase" and it reduces the risk of unwanted deinstallations
+  # not working ...
   package {
     [
       'alsa-firmware',
       'alsa-tools-firmware',
     ]:
-    ensure => purged,
+    ensure => absent,
   }
 
   package {
