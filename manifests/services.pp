@@ -141,5 +141,6 @@ class secc_os_linux::services {
   service { 'arpwatch':
     ensure => running,
     enable => true,
+    require => Package['arpwatch'],
   }
 }
