@@ -1,4 +1,4 @@
-# config for umask setting - test webhook, r10k and  umask
+# config for umask setting
 # copied from puppet os hardening module - see hardening.io for details
 class secc_os_linux::profile {
 
