@@ -49,6 +49,16 @@ class secc_os_linux::services {
       hasstatus => true;
   }
 
+
+  # own handling of alsa-firmware, because dependency between those package have to be removed "yum -y erase" and it reduces the risk of unwanted deinstallations
+  package {
+    [
+      'alsa-firmware',
+      'alsa-tools-firmware',
+    ]:
+    ensure => purged,
+  }
+
   package {
     [
       'abrtd',
@@ -72,8 +82,6 @@ class secc_os_linux::services {
       'aic94xx-firmware',
       'atmel-firmware',
       'adaptec-firmware',
-      'alsa-firmware',
-      'alsa-tools-firmware',
       'bfa-firmware',
       'brocade-firmware',
       'icom-firmware',
