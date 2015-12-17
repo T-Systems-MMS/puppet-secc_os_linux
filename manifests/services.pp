@@ -139,7 +139,7 @@ class secc_os_linux::services {
   }
 
   service { 'arpwatch':
-    ensure => enabled,
+    ensure => running,
     enable => true,
   }
 }
