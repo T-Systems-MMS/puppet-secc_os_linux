@@ -1,0 +1,4 @@
+# -u <username> : defines with what user id arpwatch should run
+# -e <email>    : the <email> where to send the reports
+# -s <from>     : the <from>-address
+OPTIONS="-u arpwatch"

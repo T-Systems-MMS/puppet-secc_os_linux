@@ -134,14 +134,4 @@ class secc_os_linux::services {
       ensure => 'present',
   }
 
-  # arpwatch to watch for arp spoofing
-  package { 'arpwatch':
-    ensure => installed,
-  }
-
-  service { 'arpwatch':
-    ensure => running,
-    enable => true,
-    require => Package['arpwatch'],
-  }
 }
