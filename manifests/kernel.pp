@@ -2,13 +2,13 @@
 # copied from puppet os hardening module - see hardening.io for details
 #
 
-# SoC - Requirement 5 - Betriebssystemfunktionen, die nicht für den Betrieb eines Servers benötigt werden, müssen abgeschaltet werden.
-# SoC - Requirement 11 - Netzfunktionen im Betriebssystemkern, die für den Betrieb als Server nicht benötigt werden, müssen abgeschaltet werden.
-# SoC - Requirement 13 - Falls vorhanden, muss die Funktion für „rp_filter“ (Reverse Path Filter) bzw. eine entsprechende Funktion des verwendeten Derivates gesetzt sein. Ebenso muss "strict destination multihoming“ aktiviert sein.
-# SoC - Requirement 16 - Der Schutz vor Buffer Overflows muss aktiviert sein.
-# SoC - Requirement 34 - Das System darf keine IP-Pakete verarbeiten, deren Absenderadresse nicht über die Schnittstelle erreicht wird, an der das Paket eingegangen ist.
-# SoC - Requirement 35 - Die Verarbeitung von ICMPv4 und ICMPv6 Paketen, die für den Betrieb nicht benötigt werden, muss deaktiviert werden.
-# SoC - Requirement 38 - IP-Pakete mit nicht benötigten Optionen oder Erweiterungs-Headern dürfen nicht bearbeitet werden.
+# SoC - Requirement 3.21-1 - Betriebssystemfunktionen, die nicht für den Betrieb eines Servers benötigt werden, müssen abgeschaltet werden.
+# SoC - Requirement 3.21-3 - Falls vorhanden, muss die Funktion für „rp_filter“ (Reverse Path Filter) bzw. eine entsprechende Funktion des verwendeten Derivates gesetzt sein. Ebenso muss "strict destination multihoming“ aktiviert sein.
+# SoC - Requirement 3.21-5 - Der Schutz vor Buffer Overflows muss aktiviert sein.
+# SoC - Requirement 3.37-6 - Netzfunktionen im Betriebssystemkern, die für den Betrieb als Server nicht benötigt werden, müssen abgeschaltet werden.
+# SoC - Requirement 3.37-10 - Das System darf keine IP-Pakete verarbeiten, deren Absenderadresse nicht über die Schnittstelle erreicht wird, an der das Paket eingegangen ist.
+# SoC - Requirement 3.37-11 - Die Verarbeitung von ICMPv4 und ICMPv6 Paketen, die für den Betrieb nicht benötigt werden, muss deaktiviert werden.
+# SoC - Requirement 3.37-12 - IP-Pakete mit nicht benötigten Optionen oder Erweiterungs-Headern dürfen nicht bearbeitet werden.
 class secc_os_linux::kernel (
   $cpu_vendor              = 'intel',
   $enable_ipv4_forwarding  = false,

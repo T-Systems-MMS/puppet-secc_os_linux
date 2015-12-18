@@ -16,13 +16,14 @@ Dieses Modul bietet eine Abdeckung der SoC Anforderungen für Linux.
 Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status via chkconfig bzw. deren Existenz (z.B. telnet), /etc/login.defs, /etc/pam.d/system-auth, /etc/pam.d/system-auth und  als auch XXXX.
 
 ###Requirement - Abdeckung
-- SoC Requirements 1, 3, 14 werden in services.pp erfüllt.
-- SoC Requirements 5, 11, 13, 16, 34, 35, 38 werden über kernel.pp (/etc/sysctl.conf) erfüllt.
-- SoC Requirement 15 wird teilweise im SSH Modul (ssh.conf) und teilweise hier erfüllt.
-- SoC Requirements 49,50,51 wird über password.pp, Passwort-Policies (/etc/login.defs und /etc/pam.d/*) und Profile erfüllt.
+- SoC Requirements 3.01-1, 3.01-3, 3.37-7 werden in services.pp erfüllt.
+- SoC Requirements 3.21-1, 3.21-3, 3.21-5, 3.37-6, 3.37-10, 3.37-11, 3.37-12 werden über kernel.pp (/etc/sysctl.conf) erfüllt.
+- SoC Requirement 3.21-4 wird teilweise im SSH Modul (ssh.conf) und teilweise hier erfüllt.
+- SoC Requirements 3.01-23, 3.01-24, 3.01-25 wird über password.pp und login_defs.pp, Passwort-Policies (/etc/login.defs und /etc/pam.d/*) und Profile erfüllt.
+- SoC Requirement 3.21-10 wird in profile.pp erfüllt.
 
 ###Abweichungen
-- SoC Requirements 2,4,7-10,12,17-20,22-33, 36,37, 39-48,53,54 müssen geprüft werden.
+- nicht abgedeckte SoC Requirements müssen geprüft und ggf. in diesem Modul ergänzt werden.
 
 ### Teile
 - audit konfiguriert rudimentäres Protokollieren von Aktivitäten auf der Bash. Kann über die syslog-Konfiguration von local6 auch an andere Server gesandt werden.

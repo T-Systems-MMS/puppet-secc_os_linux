@@ -1,9 +1,9 @@
 # config for password algorithm
 # copied from puppet os hardening module - see hardening.io for details
 class secc_os_linux::login_defs {
-  
-  # SoC - Requirement 50 - Falls Passwörter als Authentisierungsmerkmal genutzt werden, muss eine Änderung des eigenen Passwortes jederzeit durch den Benutzer möglich sein.
-  
+
+  # SoC - Requirement 3.01-24 - Falls Passwörter als Authentisierungsmerkmal genutzt werden, muss eine Änderung des eigenen Passwortes jederzeit durch den Benutzer möglich sein.
+
   file_line { 'login_defs_PASS_MIN_DAYS' :
     ensure => present,
     path   => '/etc/login.defs',
@@ -24,5 +24,5 @@ class secc_os_linux::login_defs {
     line   => 'UMASK 077',
     match  => '^UMASK.*',
   }
-  
+
 }

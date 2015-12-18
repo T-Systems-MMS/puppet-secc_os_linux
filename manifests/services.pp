@@ -14,14 +14,12 @@ class secc_os_linux::services {
     [
       'acpid',
       'anacron',
-      'atd',
       'cups',
       'dhcpd',
       'network-remotefs', # needs to come before haldaemon for SLES11
       'haldaemon',
       'lm_sensors',
       'mdmonitor',
-      'named',
       'netconsole',
       'netfs',
       'nfs',     # only remove this line if nfs must be enabled
@@ -72,7 +70,6 @@ class secc_os_linux::services {
       'kdump',
       'rlogin',
       'rsh-server',
-      'telnet',
       'telnet-server',
       'tftp-server',
       'ypserv',
@@ -127,7 +124,6 @@ class secc_os_linux::services {
   package {
     [
       'curl',
-      'strace',
       'tcpdump',
       'wget',
     ]:
