@@ -19,11 +19,11 @@ class secc_os_linux::kernel (
 ){
 
   # Networking
-  # ---------- 
-  
+  # ----------
+
   # IPv6 enabled
   if $enable_ipv6 {
-  
+
     file_line { 'kernel_enable_IPv6' :
       ensure => present,
       path   => '/etc/sysctl.conf',
@@ -31,9 +31,9 @@ class secc_os_linux::kernel (
       match  => 'net.ipv6.conf.all.disable_ipv6.*',
       notify => Exec['sysctl_load'],
     }
-    
+
     if $enable_ipv6_forwarding {
-    
+
       file_line { 'kernel_enable_IPv6_routing' :
         ensure => present,
         path   => '/etc/sysctl.conf',
@@ -42,9 +42,9 @@ class secc_os_linux::kernel (
         notify => Exec['sysctl_load'],
       }
 
-      
+
     } else {
-    
+
         file_line { 'kernel_disable_IPv6_routing' :
           ensure => present,
           path   => '/etc/sysctl.conf',
@@ -52,11 +52,11 @@ class secc_os_linux::kernel (
           match  => 'net.ipv6.conf.all.forwarding.*',
           notify => Exec['sysctl_load'],
         }
-        
+
     }
   } else {
     # IPv6 disabled - only the relevant taken
-    
+
       file_line { 'kernel_disable_IPv6_completely' :
         ensure => present,
         path   => '/etc/sysctl.conf',
@@ -64,7 +64,7 @@ class secc_os_linux::kernel (
         match  => 'net.ipv6.conf.all.disable_ipv6.*',
         notify => Exec['sysctl_load'],
       }
-      
+
       file_line { 'kernel_disable_IPv6_routing' :
         ensure => present,
         path   => '/etc/sysctl.conf',
@@ -72,9 +72,9 @@ class secc_os_linux::kernel (
         match  => 'net.ipv6.conf.all.forwarding.*',
         notify => Exec['sysctl_load'],
       }
-      
+
   }
-  
+
   # Only enable IP traffic forwarding, if required.
   file_line { 'kernel_disable_IPv4_routing' :
     ensure => present,
@@ -83,7 +83,7 @@ class secc_os_linux::kernel (
     match  => 'net.ipv4.ip_forward.*',
     notify => Exec['sysctl_load'],
   }
-  
+
   # Enable RFC-recommended source validation feature. It should not be used for routers on complex networks, but is helpful for end hosts and routers serving small networks.
   file_line { 'kernel_enable_IPv4_reverse_path_filtering' :
     ensure => present,
@@ -92,7 +92,7 @@ class secc_os_linux::kernel (
     match  => 'net.ipv4.conf.all.rp_filter.*',
     notify => Exec['sysctl_load'],
   }
-  
+
   file_line { 'kernel_enable_IPv4_reverse_path_filtering_default' :
     ensure => present,
     path   => '/etc/sysctl.conf',
@@ -134,7 +134,7 @@ class secc_os_linux::kernel (
     match  => 'net.ipv4.conf.default.accept_source_route.*',
     notify => Exec['sysctl_load'],
   }
-  
+
   # Accepting source route can lead to malicious networking behavior, so disable it if not needed.
   file_line { 'kernel_IPv4_do_not_accept_redirects' :
     ensure => present,
@@ -143,7 +143,7 @@ class secc_os_linux::kernel (
     match  => 'net.ipv4.conf.all.accept_redirects.*',
     notify => Exec['sysctl_load'],
   }
-  
+
   file_line { 'kernel_IPv4_do_not_accept_redirects_default' :
     ensure => present,
     path   => '/etc/sysctl.conf',
@@ -159,7 +159,7 @@ class secc_os_linux::kernel (
     match  => 'net.ipv4.conf.all.secure_redirects.*',
     notify => Exec['sysctl_load'],
   }
-  
+
   file_line { 'kernel_IPv4_do_not_accept_secure_redirects_default' :
     ensure => present,
     path   => '/etc/sysctl.conf',
@@ -167,7 +167,7 @@ class secc_os_linux::kernel (
     match  => 'net.ipv4.conf.default.secure_redirects.*',
     notify => Exec['sysctl_load'],
   }
-  
+
   # For non-routers: don't send redirects, these settings are 0
   file_line { 'kernel_IPv4_do_not_send_redirects' :
     ensure => present,
@@ -183,8 +183,8 @@ class secc_os_linux::kernel (
     match  => 'net.ipv4.conf.default.send_redirects.*',
     notify => Exec['sysctl_load'],
   }
-  
-  
+
+
   file_line { 'kernel_IPv4_tcp_sync_protection' :
     ensure => present,
     path   => '/etc/sysctl.conf',
@@ -208,11 +208,11 @@ class secc_os_linux::kernel (
     match  => 'net.ipv4.icmp_ratemask.*',
     notify => Exec['sysctl_load'],
   }
-  
-  
+
+
   # ARP control
   if $arp_restricted {
-    
+
     file_line { 'kernel_IPv4_arp_ignore' :
       ensure => present,
       path   => '/etc/sysctl.conf',
@@ -220,7 +220,15 @@ class secc_os_linux::kernel (
       match  => 'net.ipv4.conf.all.arp_ignore.*',
       notify => Exec['sysctl_load'],
     }
-    
+
+    file_line { 'kernel_IPv4_arp_filter' :
+      ensure => present,
+      path   => '/etc/sysctl.conf',
+      line   => 'net.ipv4.conf.all.arp_filter = 1',
+      match  => 'net.ipv4.conf.all.arp_filter.*',
+      notify => Exec['sysctl_load'],
+    }
+
     file_line { 'kernel_IPv4_arp_announce_interface' :
       ensure => present,
       path   => '/etc/sysctl.conf',
@@ -228,9 +236,9 @@ class secc_os_linux::kernel (
       match  => 'net.ipv4.conf.all.arp_announce.*',
       notify => Exec['sysctl_load'],
     }
-    
+
   } else {
-    
+
       file_line { 'kernel_IPv4_arp_dont_ignore' :
         ensure => present,
         path   => '/etc/sysctl.conf',
@@ -238,7 +246,7 @@ class secc_os_linux::kernel (
         match  => 'net.ipv4.conf.all.arp_ignore.*',
         notify => Exec['sysctl_load'],
       }
-      
+
       file_line { 'kernel_IPv4_arp_announce_interface' :
         ensure => present,
         path   => '/etc/sysctl.conf',
@@ -246,9 +254,17 @@ class secc_os_linux::kernel (
         match  => 'net.ipv4.conf.all.arp_announce.*',
         notify => Exec['sysctl_load'],
       }
+
+	    file_line { 'kernel_IPv4_arp_filter' :
+	      ensure => present,
+	      path   => '/etc/sysctl.conf',
+	      line   => 'net.ipv4.conf.all.arp_filter = 1',
+	      match  => 'net.ipv4.conf.all.arp_filter.*',
+	      notify => Exec['sysctl_load'],
+	    }
   }
-  
-  
+
+
   # RFC 1337 fix F1
   # This note describes some theoretically-possible failure modes for TCP connections and discusses possible remedies.
   # In particular, one very simple fix is identified.
@@ -259,7 +275,7 @@ class secc_os_linux::kernel (
     match  => 'net.ipv4.tcp_rfc1337.*',
     notify => Exec['sysctl_load'],
   }
-  
+
 
   # log martian packets (risky, may cause DoS)
   #file_line {'kernel_IPv4_log_faked_network_packets':
@@ -269,8 +285,8 @@ class secc_os_linux::kernel (
   #  match  => 'net.ipv4.conf.all.log_martians.*',
   #  notify => Exec['sysctl_load'],
   #}
-  
-  # Magic Sysrq should be disabled, but can also be set to a safe value if so desired for physical machines. 
+
+  # Magic Sysrq should be disabled, but can also be set to a safe value if so desired for physical machines.
   # It can allow a safe reboot if the system hangs and is a 'cleaner' alternative to hitting the reset button.
   # The following values are permitted:
   #
@@ -303,8 +319,8 @@ class secc_os_linux::kernel (
     match  => 'fs.suid_dumpable.*',
     notify => Exec['sysctl_load'],
   }
-  
-  
+
+
   # buffer overflow protection
   file_line { 'kernel_random_va_space' :
     ensure => present,
@@ -313,7 +329,7 @@ class secc_os_linux::kernel (
     match  => 'kernel.randomize_va_space.*',
     notify => Exec['sysctl_load'],
   }
-  
+
   if ( $::kernelmajversion < '3.0' ) {
     file_line { 'kernel_exec_shield' :
       ensure => present,
@@ -322,13 +338,13 @@ class secc_os_linux::kernel (
       match  => 'kernel.exec-shield.*',
       notify => Exec['sysctl_load'],
     }
-    
+
   }
 
-  
+
   exec { 'sysctl_load':
     command     => '/sbin/sysctl -p /etc/sysctl.conf',
     refreshonly => true,
   }
-  
+
 }
