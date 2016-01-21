@@ -1,4 +1,4 @@
-# AMCS SecC - Linux OS Module - Version 1.0.2
+﻿# AMCS SecC - Linux OS Module - Version 1.0.3
 
 ####Table of Contents
 
@@ -16,7 +16,7 @@ Dieses Modul bietet eine Abdeckung der SoC Anforderungen für Linux.
 Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status via chkconfig bzw. deren Existenz (z.B. telnet), /etc/login.defs, /etc/pam.d/system-auth, /etc/pam.d/system-auth und  als auch XXXX.
 
 ###Requirement - Abdeckung
-- SoC Requirements 3.01-1, 3.01-3, 3.37-7 werden in services.pp erfüllt.
+- SoC Requirements 3.01-1, 3.01-3, 3.37-7 werden in packages.pp sowie services.pp erfüllt.
 - SoC Requirements 3.21-1, 3.21-3, 3.21-5, 3.37-6, 3.37-10, 3.37-11, 3.37-12 werden über kernel.pp (/etc/sysctl.conf) erfüllt.
 - SoC Requirement 3.21-4 wird teilweise im SSH Modul (ssh.conf) und teilweise hier erfüllt.
 - SoC Requirements 3.01-23, 3.01-24, 3.01-25 wird über password.pp und login_defs.pp, Passwort-Policies (/etc/login.defs und /etc/pam.d/*) und Profile erfüllt.
@@ -61,4 +61,5 @@ Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status
 - Initialrelease.
 - 1.0.1 fix of rootsh integration in /etc/profile to allow non interactive shells to work (like scp)
 - 1.0.2 added arpwatch to detect arp-spoofing attack (alerting not included)
+- 1.0.3 fixed alsa-firmware conflict, which occured only once at the first run
 - next: iptables integration (maybe own module)

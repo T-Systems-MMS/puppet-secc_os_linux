@@ -14,6 +14,8 @@ class secc_os_linux {
 
   include secc_os_linux::password
 
+  include secc_os_linux::packages
+
   include secc_os_linux::profile
 
   include secc_os_linux::rootsh
