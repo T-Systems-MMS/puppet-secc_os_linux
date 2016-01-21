@@ -11,7 +11,7 @@ class secc_os_linux::packages {
   # not working ...
 
   exec { 'remove_alsa-firmware':
-    command => 'yum -y erase alsa-firmware alsa-tools-firmware',
+    command => '/usr/bin/yum -y erase alsa-firmware alsa-tools-firmware',
     onlyif  => '/usr/bin/yum list installed |/usr/bin/grep alsa-firmware',
   }
 
