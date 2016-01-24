@@ -10,9 +10,18 @@ class secc_os_linux::packages {
   # own handling of alsa-firmware, because dependency between those package have to be removed "yum -y erase" and it reduces the risk of unwanted deinstallations
   # not working ...
 
-  exec { 'remove_alsa-firmware':
-    command => '/usr/bin/yum -y erase alsa-firmware alsa-tools-firmware',
-    onlyif  => '/usr/bin/yum list installed |/usr/bin/grep alsa-firmware',
+  if ( $::operatingsystem == 'RedHat' ) or ( $::operatingsystem == 'CentOS' ) {
+      if ( $::operatingsystemmajrelease == '6' ) {
+        exec { 'remove_alsa-firmware':
+          command => '/usr/bin/yum -y erase alsa-firmware alsa-tools-firmware',
+          onlyif  => '/usr/bin/yum list installed | /bin/grep alsa-firmware',
+        }
+      } elsif ( $::operatingsystemmajrelease == '7' ) {
+        exec { 'remove_alsa-firmware':
+          command => '/usr/bin/yum -y erase alsa-firmware alsa-tools-firmware',
+          onlyif  => '/usr/bin/yum list installed | /usr/bin/grep alsa-firmware',
+        }
+      }
   }
 
   package {
@@ -81,7 +90,6 @@ class secc_os_linux::packages {
   package {
     [
       'curl',
-      'tcpdump',
       'wget',
     ]:
       ensure => 'present',
