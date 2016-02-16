@@ -5,7 +5,7 @@ driver:
 
 provisioner:
   name: puppet_apply
-  manifests_path: puppet/manifests
+  manifests_path: test
   modules_path: puppet/modules
   hiera_data_path: puppet/hieradata
   require_chef_for_busser: false
