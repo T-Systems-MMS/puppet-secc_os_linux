@@ -1,4 +1,6 @@
 # box url on \\file-mms\mms\users
+# powershell does not work with puppet module install and proxy...
+# for dependencies this command needs to be executed prior converge/ test: "set http_proxy=http://proxy.mms-dresden.de:8080"
 ---
 driver:
   name: vagrant
@@ -11,6 +13,8 @@ provisioner:
   require_chef_for_busser: false
   http_proxy: http://proxy.mms-dresden.de:8080
   https_proxy: http://proxy.mms-dresden.de:8080
+  # certificate 
+  librarian_puppet_ssl_file: 'C:/Users/rkno/Documents/GitHub/secc_os_linux/cacert.pem'
 
 platforms:
 - name: centos7

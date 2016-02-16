@@ -1,9 +1,9 @@
 {
   "author": "rkno",
-  "dependencies": [ 'stdlib' ],
+  "dependencies": [ {"name":"puppetlabs/stdlib"}],
   "license": "",
   "name": "secc_os_linux",
-  "operatingsystem_support": [ 'RHEL6', 'RHEL7', 'CentOS6', 'CentOS7' ],
+  "operatingsystem_support": [ "RHEL6", "RHEL7", "CentOS6", "CentOS7" ],
   "project_page": "",
   "requirements": [],
   "source": "",
