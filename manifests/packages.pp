@@ -1,7 +1,10 @@
 # config for service availability and status
 # copied from puppet os hardening module - see hardening.io for details
 
-class secc_os_linux::packages {
+class secc_os_linux::packages (
+  $tftp_server_package_status,
+  $xinetd_package_status,
+){
 
   # SoC - Requirement 3.01-3 - Nicht benötigte Software darf nicht installiert oder muss deinstalliert werden.
   #    deinstall: telnet, abrt
@@ -26,6 +29,20 @@ class secc_os_linux::packages {
 
   package {
     [
+      'tftp-server',
+    ]:
+    ensure => $tftp_server_package_status
+  }
+
+  package {
+    [
+      'xinetd',
+    ]:
+    ensure => $xinetd_package_status
+  }
+
+  package {
+    [
       'abrtd',
       'autofs',
       'avahi',
@@ -37,11 +54,8 @@ class secc_os_linux::packages {
       'rlogin',
       'rsh-server',
       'telnet-server',
-      'tftp-server',
       'ypserv',
       'ypbind',
-      'xinetd',
-
       # remove default installed firmware
       'aic94xx-firmware',
       'atmel-firmware',
