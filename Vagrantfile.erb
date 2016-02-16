@@ -1,0 +1,16 @@
+Vagrant.configure("2") do |c|
+  c.vm.box = "<%= config[:box] %>"
+  c.vm.box_url = "<%= config[:box_url] %>"
+
+  c.ssh.username = "root"
+  c.ssh.private_key_path = "C:/Users/rkno/Documents/GitHub/np6_ag2_vmtemplates/virtualbox_vagrantbox/kitchen/id_rsa"
+  
+  if Vagrant.has_plugin?("vagrant-proxyconf")
+    c.proxy.http     = "http://proxy.mms-dresden.de:8080"
+    c.proxy.https    = "http://proxy.mms-dresden.de:8080"
+    c.proxy.no_proxy = "localhost,127.0.0.1,.mms-dresden.de"
+  end
+  
+  c.vm.synced_folder ".", "/vagrant", disabled: true
+  
+end

@@ -1,0 +1,73 @@
+# box url on \\file-mms\mms\users
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: puppet_apply
+  manifests_path: puppet/manifests
+  modules_path: puppet/modules
+  hiera_data_path: puppet/hieradata
+  require_chef_for_busser: false
+  http_proxy: http://proxy.mms-dresden.de:8080
+  https_proxy: http://proxy.mms-dresden.de:8080
+
+platforms:
+- name: centos7
+  driver_plugin: vagrant
+  driver:
+    box: centos7
+    box_check_update: true
+    box_url: file:///H:/vagrantboxes/packer-centos7-virtualbox-iso.box
+    vagrantfile_erb: Vagrantfile.erb
+
+- name: rhel7
+  driver_plugin: vagrant
+  driver:
+    box: rhel7
+    box_check_update: true
+    box_url: file:///H:/vagrantboxes/packer-rhel7-virtualbox-iso.box
+    vagrantfile_erb: Vagrantfile.erb
+
+- name: centos6
+  driver_plugin: vagrant
+  driver:
+    box: centos6
+    box_check_update: true
+    box_url: file:///H:/vagrantboxes/packer-centos6-virtualbox-iso.box
+    vagrantfile_erb: Vagrantfile.erb
+
+- name: rhel6
+  driver_plugin: vagrant
+  driver:
+    box: rhel6
+    box_check_update: true
+    box_url: file:///H:/vagrantboxes/packer-rhel6-virtualbox-iso.box
+    vagrantfile_erb: Vagrantfile.erb
+
+suites:
+ - name: rhel7_centos7
+   sudo: false
+   verifier:
+     ruby_bindir: '/bin/'
+   excludes:
+     - rhel6
+     - centos6
+ 
+ - name: rhel6_centos6
+   sudo: false
+   verifier:
+     ruby_bindir: '/usr/local/rvm/rubies/ruby-1.9.3-p551/bin/'
+   excludes:
+     - rhel7
+     - centos7
+
+#verifier:
+  #centos6 after gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 && curl -sSL https://get.rvm.io | bash -s stable && source /etc/profile.d/rvm.sh && rvm install 1.9.3 && ruby -v && source /etc/profile.d/rvm.sh && rvm 1.9.3 --default
+  # question: how to automate that?
+  # anpassung: C:\Ruby22\lib\ruby\gems\2.2.0\gems\test-kitchen-1.4.2\support\busser_install_command.sh:
+  # export PATH="/usr/local/rvm/gems/ruby-1.9.3-p551/bin:/usr/local/rvm/gems/ruby-1.9.3-p551@global/bin:/usr/local/rvm/rubies/ruby-1.9.3-p551/bin:/usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
+  #ruby_bindir: '/usr/local/rvm/rubies/ruby-1.9.3-p551/bin/'
+  
+  #centos7 and rhel7
+  #ruby_bindir: '/bin/'
