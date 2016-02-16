@@ -25,29 +25,29 @@ platforms:
     box_url: file:///H:/vagrantboxes/packer-centos7-virtualbox-iso.box
     vagrantfile_erb: Vagrantfile.erb
 
-#- name: rhel7
-#  driver_plugin: vagrant
-#  driver:
-#    box: rhel7
-#    box_check_update: true
-#    box_url: file:///H:/vagrantboxes/packer-rhel7-virtualbox-iso.box
-#    vagrantfile_erb: Vagrantfile.erb
-#
-#- name: centos6
-#  driver_plugin: vagrant
-#  driver:
-#    box: centos6
-#    box_check_update: true
-#    box_url: file:///H:/vagrantboxes/packer-centos6-virtualbox-iso.box
-#    vagrantfile_erb: Vagrantfile.erb
-#
-#- name: rhel6
-#  driver_plugin: vagrant
-#  driver:
-#    box: rhel6
-#    box_check_update: true
-#    box_url: file:///H:/vagrantboxes/packer-rhel6-virtualbox-iso.box
-#    vagrantfile_erb: Vagrantfile.erb
+- name: rhel7
+  driver_plugin: vagrant
+  driver:
+    box: rhel7
+    box_check_update: true
+    box_url: file:///H:/vagrantboxes/packer-rhel7-virtualbox-iso.box
+    vagrantfile_erb: Vagrantfile.erb
+
+- name: centos6
+  driver_plugin: vagrant
+  driver:
+    box: centos6
+    box_check_update: true
+    box_url: file:///H:/vagrantboxes/packer-centos6-virtualbox-iso.box
+    vagrantfile_erb: Vagrantfile.erb
+
+- name: rhel6
+  driver_plugin: vagrant
+  driver:
+    box: rhel6
+    box_check_update: true
+    box_url: file:///H:/vagrantboxes/packer-rhel6-virtualbox-iso.box
+    vagrantfile_erb: Vagrantfile.erb
 
 suites:
  - name: rhel7_centos7
