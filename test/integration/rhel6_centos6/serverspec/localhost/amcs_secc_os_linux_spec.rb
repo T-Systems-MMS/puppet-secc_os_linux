@@ -73,6 +73,9 @@ require 'spec_helper'
 		context linux_kernel_parameter('net.ipv4.conf.all.arp_ignore') do 
 			its(:value) { should eq 1 }
 		end
+		context linux_kernel_parameter('net.ipv4.conf.default.arp_ignore') do 
+			its(:value) { should eq 1 }
+		end
 		context linux_kernel_parameter('net.ipv4.conf.all.arp_announce') do 
 			its(:value) { should eq 2 }
 		end
@@ -83,6 +86,22 @@ require 'spec_helper'
 			its(:value) { should eq 0 }
 		end
 		context linux_kernel_parameter('fs.suid_dumpable') do 
+			its(:value) { should eq 0 }
+		end
+		
+		context linux_kernel_parameter('fs.suid_dumpable') do 
+			its(:value) { should eq 0 }
+		end
+		
+		context linux_kernel_parameter('net.ipv4.conf.default.log_martians') do 
+			its(:value) { should eq 1 }
+		end
+		
+		context linux_kernel_parameter('net.ipv4.conf.all.log_martians') do 
+			its(:value) { should eq 1 }
+		end
+		
+		context linux_kernel_parameter('net.ipv4.tcp_timestamps') do 
 			its(:value) { should eq 0 }
 		end
 		

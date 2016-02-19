@@ -209,6 +209,14 @@ class secc_os_linux::kernel (
     notify => Exec['sysctl_load'],
   }
 
+  file_line { 'kernel_IPv4_tcp_timestamps' :
+    ensure => present,
+    path   => '/etc/sysctl.conf',
+    line   => 'net.ipv4.tcp_timestamps = 0',
+    match  => 'net.ipv4.tcp_timestamps.*',
+    notify => Exec['sysctl_load'],
+  }
+
 
   # ARP control
   if $arp_restricted {
@@ -218,6 +226,14 @@ class secc_os_linux::kernel (
       path   => '/etc/sysctl.conf',
       line   => 'net.ipv4.conf.all.arp_ignore = 1',
       match  => 'net.ipv4.conf.all.arp_ignore.*',
+      notify => Exec['sysctl_load'],
+    }
+
+    file_line { 'kernel_IPv4_arp_ignore_default' :
+      ensure => present,
+      path   => '/etc/sysctl.conf',
+      line   => 'net.ipv4.conf.default.arp_ignore = 1',
+      match  => 'net.ipv4.conf.default.arp_ignore.*',
       notify => Exec['sysctl_load'],
     }
 
@@ -278,13 +294,21 @@ class secc_os_linux::kernel (
 
 
   # log martian packets (risky, may cause DoS)
-  #file_line {'kernel_IPv4_log_faked_network_packets':
-  #  ensure => present,
-  #  path   => '/etc/sysctl.conf',
-  #  line   => 'net.ipv4.conf.all.log_martians = 1',
-  #  match  => 'net.ipv4.conf.all.log_martians.*',
-  #  notify => Exec['sysctl_load'],
-  #}
+  file_line {'kernel_IPv4_log_faked_network_packets':
+    ensure => present,
+    path   => '/etc/sysctl.conf',
+    line   => 'net.ipv4.conf.all.log_martians = 1',
+    match  => 'net.ipv4.conf.all.log_martians.*',
+    notify => Exec['sysctl_load'],
+  }
+
+  file_line {'kernel_IPv4_log_faked_network_packets_default':
+    ensure => present,
+    path   => '/etc/sysctl.conf',
+    line   => 'net.ipv4.conf.default.log_martians = 1',
+    match  => 'net.ipv4.conf.default.log_martians.*',
+    notify => Exec['sysctl_load'],
+  }
 
   # Magic Sysrq should be disabled, but can also be set to a safe value if so desired for physical machines.
   # It can allow a safe reboot if the system hangs and is a 'cleaner' alternative to hitting the reset button.
