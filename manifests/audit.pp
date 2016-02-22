@@ -43,7 +43,6 @@ class secc_os_linux::audit {
           source  => 'puppet:///modules/secc_os_linux/etc/rhel7_bashrc',
         }
       }
-
   }
 
 }
