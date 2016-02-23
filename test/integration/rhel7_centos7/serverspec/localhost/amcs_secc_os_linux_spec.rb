@@ -106,7 +106,7 @@ require 'spec_helper'
 			its(:value) { should_not eq 0 }
 		end
 		context linux_kernel_parameter('kernel.randomize_va_space') do 
-			its(:value) { should eq 1 }
+			its(:value) { should eq 2 }
 		end
 	end
 
