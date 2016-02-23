@@ -271,13 +271,13 @@ class secc_os_linux::kernel (
         notify => Exec['sysctl_load'],
       }
 
-	    file_line { 'kernel_IPv4_arp_filter' :
-	      ensure => present,
-	      path   => '/etc/sysctl.conf',
-	      line   => 'net.ipv4.conf.all.arp_filter = 1',
-	      match  => 'net.ipv4.conf.all.arp_filter.*',
-	      notify => Exec['sysctl_load'],
-	    }
+      file_line { 'kernel_IPv4_arp_filter' :
+        ensure => present,
+        path   => '/etc/sysctl.conf',
+        line   => 'net.ipv4.conf.all.arp_filter = 1',
+        match  => 'net.ipv4.conf.all.arp_filter.*',
+        notify => Exec['sysctl_load'],
+      }
   }
 
 

@@ -26,21 +26,21 @@ class secc_os_linux::audit {
   if ( $::operatingsystem == 'RedHat' ) or ( $::operatingsystem == 'CentOS' ) {
       if ( $::operatingsystemmajrelease  == '6.0' ) {
         file { '/etc/bashrc':
-          ensure  => present,
-          owner   => 'root',
-          group   => 'root',
-          mode    => '644',
-          source  => 'puppet:///modules/secc_os_linux/etc/rhel6_bashrc',
+          ensure => present,
+          owner  => 'root',
+          group  => 'root',
+          mode   => '0644',
+          source => 'puppet:///modules/secc_os_linux/etc/rhel6_bashrc',
         }
       }
 
       if ( $::operatingsystemmajrelease  == '7.0' ) {
         file { '/etc/bashrc':
-          ensure  => present,
-          owner   => 'root',
-          group   => 'root',
-          mode    => '644',
-          source  => 'puppet:///modules/secc_os_linux/etc/rhel7_bashrc',
+          ensure => present,
+          owner  => 'root',
+          group  => 'root',
+          mode   => '0644',
+          source => 'puppet:///modules/secc_os_linux/etc/rhel7_bashrc',
         }
       }
   }

@@ -1,3 +1,4 @@
+# arp spoofing handling
 class secc_os_linux::arpwatch {
 
   # arpwatch to watch for arp spoofing
@@ -6,20 +7,19 @@ class secc_os_linux::arpwatch {
   }
 
   service { 'arpwatch':
-    ensure => running,
-    enable => true,
+    ensure  => running,
+    enable  => true,
     require => Package['arpwatch'],
   }
 
-	if ( $::operatingsystem == 'RedHat' ) or ( $::operatingsystem == 'CentOS' ) {
-	  file { '/etc/sysconfig/arpwatch':
-	    ensure => present,
-	    owner  => 'root',
-	    group  => 'root',
-	    mode   => '0644',
-	    source => 'puppet:///modules/secc_os_linux/etc/sysconfig/arpwatch',
-	    notify => Service['arpwatch'],
-	  }
-
+  if ( $::operatingsystem == 'RedHat' ) or ( $::operatingsystem == 'CentOS' ) {
+    file { '/etc/sysconfig/arpwatch':
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => 'puppet:///modules/secc_os_linux/etc/sysconfig/arpwatch',
+      notify => Service['arpwatch'],
+    }
   }
 }
