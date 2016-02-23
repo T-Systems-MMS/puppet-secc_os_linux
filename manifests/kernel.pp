@@ -349,7 +349,7 @@ class secc_os_linux::kernel (
   file_line { 'kernel_random_va_space' :
     ensure => present,
     path   => '/etc/sysctl.conf',
-    line   => 'kernel.randomize_va_space = 1',
+    line   => 'kernel.randomize_va_space = 2',
     match  => 'kernel.randomize_va_space.*',
     notify => Exec['sysctl_load'],
   }
