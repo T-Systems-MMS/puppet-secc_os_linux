@@ -63,4 +63,5 @@ Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status
 - 1.0.2 added arpwatch to detect arp-spoofing attack (alerting not included)
 - 1.0.3 fixed alsa-firmware conflict, which occured only once at the first run
 - 1.1.0 added test kitchen integration (with ruby 2.2.4) and parameters for xinetd and tftp-servers
+- 1.2.0 added CIS compliant mount point configurations and disabled firewall and usb storage kernel modules
 - next: iptables integration (maybe own module) or augeas instead of file_line

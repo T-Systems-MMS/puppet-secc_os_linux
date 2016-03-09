@@ -89,10 +89,6 @@ require 'spec_helper'
 			its(:value) { should eq 0 }
 		end
 		
-		context linux_kernel_parameter('fs.suid_dumpable') do 
-			its(:value) { should eq 0 }
-		end
-		
 		context linux_kernel_parameter('net.ipv4.conf.default.log_martians') do 
 			its(:value) { should eq 1 }
 		end
@@ -400,7 +396,31 @@ require 'spec_helper'
 	describe command('awk -F":" \'($2 == "") {print $1}\' /etc/shadow') do
 		its(:stdout) { should match /^$/ }
 	end
-	
+
+# checking for modules
+    if ( os[:release] >= '6' && os[:release] < '7.0' )
+        describe command('modprobe --showconfig | grep blacklist') do
+            its(:stdout) { should match /blacklist usb-storage/ }
+            its(:stdout) { should match /blacklist firewire-core/ }
+            its(:stdout) { should match /blacklist firewire-ohci/ }
+        end
+    end
+    if ( os[:release] >= '7' && os[:release] < '8.0' )
+        describe command('modprobe --showconfig | grep blacklist') do
+            its(:stdout) { should match /blacklist usb_storage/ }
+            its(:stdout) { should match /blacklist firewire_core/ }
+            its(:stdout) { should match /blacklist firewire_ohci/ }
+        end
+    end
+    
+    describe command('modprobe usb-storage') do
+        its(:exit_status) { should eq 1 }
+    end
+    
+    describe command('modprobe firewire-core') do
+        its(:exit_status) { should eq 1 }
+    end
+
 # checking for rootsh - redhat derivates only
 	if (os[:family] == 'redhat')
 #		describe command('w | awk -F\' \' \'{print $8}\'') do
@@ -408,3 +428,28 @@ require 'spec_helper'
 #			its(:stdout) { should_not match /\/bin\/bash/ }
 #		end
 	end
+	
+# mounts
+  describe file('/tmp') do
+    it { should be_mounted }
+    it { should be_mounted.with( :options => { :nodev => true } ) }
+    # noexec on /tmp prevents test-kitchen :/
+    #it { should be_mounted.with( :options => { :noexec => true } ) }
+    it { should be_mounted.with( :options => { :nosuid => true } ) }
+  end 
+  
+  describe file('/var') do
+    it { should be_mounted }
+    it { should be_mounted.with( :options => { :nodev => true } ) }
+    it { should be_mounted.with( :options => { :noexec => true } ) }
+    it { should be_mounted.with( :options => { :nosuid => true } ) }
+  end 
+  
+  describe file('/home') do
+    it { should be_mounted }
+    it { should be_mounted.with( :options => { :nodev => true } ) }
+  end 
+
+  describe command('mount | grep /var/tmp') do
+    its(:stdout) { should match /\/var\/tmp/ }
+  end

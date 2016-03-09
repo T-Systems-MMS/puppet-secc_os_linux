@@ -18,6 +18,10 @@ class secc_os_linux (
 
   include secc_os_linux::login_defs
 
+  include secc_os_linux::modules
+
+  include secc_os_linux::mounts
+
   include secc_os_linux::password
 
   class { 'secc_os_linux::packages':
