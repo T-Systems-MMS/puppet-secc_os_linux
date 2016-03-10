@@ -101,12 +101,6 @@ class secc_os_linux::packages (
   }
 
   # packages we need for every service
-  package {
-    [
-      'curl',
-      'wget',
-    ]:
-      ensure => 'present',
-  }
+  ensure_packages( ['curl', 'wget'] )
 
 }
