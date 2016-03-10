@@ -10,8 +10,8 @@ class secc_os_linux::mounts (
     # noexec on /tmp prevents test-kitchen :/
     mount { '/tmp':
       ensure  => 'mounted',
-      options => 'defaults,nodev,nosuid',
-      #options => 'defaults,noexec,nodev,nosuid',
+      #options => 'defaults,nodev,nosuid',
+      options => 'defaults,noexec,nodev,nosuid',
       target  => '/etc/fstab',
     }
   }
