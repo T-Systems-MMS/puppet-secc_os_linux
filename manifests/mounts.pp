@@ -7,9 +7,9 @@ class secc_os_linux::mounts (
 ){
 
   if ( $secure_mountpoint_tmp ) {
-    # noexec on /tmp prevents test-kitchen :/
     mount { '/tmp':
       ensure  => 'mounted',
+      # noexec on /tmp prevents test-kitchen :/
       #options => 'defaults,nodev,nosuid',
       options => 'defaults,noexec,nodev,nosuid',
       target  => '/etc/fstab',
@@ -23,7 +23,6 @@ class secc_os_linux::mounts (
       options => 'defaults,noexec,nodev,nosuid',
       target  => '/etc/fstab',
       pass    => '2',
-      }
     }
   }
 
