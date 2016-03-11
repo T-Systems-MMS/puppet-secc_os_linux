@@ -13,6 +13,7 @@ class secc_os_linux::mounts (
       #options => 'defaults,nodev,nosuid',
       options => 'defaults,noexec,nodev,nosuid',
       target  => '/etc/fstab',
+      pass    => '2',
     }
   }
 
@@ -21,6 +22,8 @@ class secc_os_linux::mounts (
       ensure  => 'mounted',
       options => 'defaults,noexec,nodev,nosuid',
       target  => '/etc/fstab',
+      pass    => '2',
+      }
     }
   }
 
@@ -29,6 +32,7 @@ class secc_os_linux::mounts (
       ensure  => 'mounted',
       options => 'defaults,nodev',
       target  => '/etc/fstab',
+      pass    => '2',
     }
   }
 
@@ -38,6 +42,7 @@ class secc_os_linux::mounts (
       device  => '/tmp',
       fstype  => 'none',
       options => 'bind',
+      pass    => '3',
     }
   }
 
