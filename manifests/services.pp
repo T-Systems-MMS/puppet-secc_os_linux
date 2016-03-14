@@ -21,7 +21,6 @@ class secc_os_linux::services {
       'netconsole',
       'netfs',
       'nfs',     # only remove this line if nfs must be enabled
-      'nfslock', # only remove this line if nfs must be enabled
       'ntpdate',
       'oddjobd',
       'portmap',
@@ -31,9 +30,6 @@ class secc_os_linux::services {
       'rdisc',
       'rhnsd',    # RHEL specific
       'rhsmcertd', # RHEL specific
-      'rpcgssd', # only remove this line if nfs must be enabled and Kerberos is in use
-      'rpcidmapd', # only remove this line if nfs must be enabled and NFSv4 is in use
-      'rpcsvcgssd', # only remove this line if nfs must be enabled and Kerberos is in use
       'saslauthd', # disables SASL, used by LDAP and Kerberos
       'sendmail',
       'smartd',   # for virtual VMs, physical servers are covered via HP tools
@@ -42,6 +38,17 @@ class secc_os_linux::services {
     ]:
       ensure    => false,
       enable    => false,
+      hasstatus => true;
+  }
+
+  service {
+    [
+      'nfslock', # only remove this line if nfs must be enabled
+      'rpcgssd', # only remove this line if nfs must be enabled and Kerberos is in use
+      'rpcidmapd', # only remove this line if nfs must be enabled and NFSv4 is in use
+      'rpcsvcgssd', # only remove this line if nfs must be enabled and Kerberos is in use
+    ]:
+      ensure    => false,
       hasstatus => true;
   }
 }
