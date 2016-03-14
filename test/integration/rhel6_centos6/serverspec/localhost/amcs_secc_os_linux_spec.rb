@@ -421,6 +421,16 @@ require 'spec_helper'
         its(:exit_status) { should eq 1 }
     end
 
+	describe file('/etc/modprobe.d/secc-blacklist.conf') do
+		its(:content) { should match /^install cramfs        \/bin\/false$/ }
+		its(:content) { should match /^install freevxfs      \/bin\/false$/ }
+		its(:content) { should match /^install jffs2         \/bin\/false$/ }
+		its(:content) { should match /^install hfs           \/bin\/false$/ }
+		its(:content) { should match /^install hfsplus       \/bin\/false$/ }
+		its(:content) { should match /^install squashfs      \/bin\/false$/ }
+		its(:content) { should match /^install udf           \/bin\/false$/ }
+	end
+
 # checking for rootsh - redhat derivates only
 	if (os[:family] == 'redhat')
 #		describe command('w | awk -F\' \' \'{print $8}\'') do

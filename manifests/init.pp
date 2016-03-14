@@ -6,6 +6,8 @@ class secc_os_linux (
   $ext_secure_mountpoint_var      = true,
   $ext_secure_mountpoint_var_tmp  = true,
   $ext_secure_mountpoint_home     = true,
+  $ext_remove_users               = [ 'ftp', 'games', 'gopher', 'uucp' ],
+  $ext_remove_groups              = [ 'ftp', 'games', 'gopher', 'uucp', 'video', 'tape' ]
 ){
 
   $tftp_server_package_status = hiera(tftp_server_package_status, $ext_tftp_server_package_status)
@@ -13,8 +15,9 @@ class secc_os_linux (
   $secure_mountpoint_tmp      = hiera(secure_mountpoint_tmp, $ext_secure_mountpoint_tmp)
   $secure_mountpoint_var      = hiera(secure_mountpoint_var, $ext_secure_mountpoint_var)
   $secure_mountpoint_var_tmp  = hiera(secure_mountpoint_var_tmp, $ext_secure_mountpoint_var_tmp)
-  $secure_mountpoint_home      = hiera(secure_mountpoint_var, $ext_secure_mountpoint_home)
-
+  $secure_mountpoint_home     = hiera(secure_mountpoint_var, $ext_secure_mountpoint_home)
+  $remove_users               = hiera(remove_users, $ext_remove_users)
+  $remove_groups              = hiera(remove_groups, $ext_remove_groups)
 
   include secc_os_linux::audit
 
@@ -51,5 +54,10 @@ class secc_os_linux (
   include secc_os_linux::services
 
   include secc_os_linux::syslog
+
+  class { 'secc_os_linux::users_group':
+    remove_users  => $remove_users,
+    remove_groups => $remove_groups,
+  }
 
 }
