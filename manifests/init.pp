@@ -9,6 +9,7 @@ class secc_os_linux (
   $ext_remove_users               = [ 'ftp', 'games', 'gopher', 'uucp' ],
   $ext_remove_groups              = [ 'ftp', 'games', 'gopher', 'uucp', 'video', 'tape' ],
   $ext_test_kitchen_run           = false,
+  $ext_rootsh_enabled             = true,
 ){
 
   $tftp_server_package_status = hiera(tftp_server_package_status, $ext_tftp_server_package_status)
@@ -19,6 +20,7 @@ class secc_os_linux (
   $secure_mountpoint_home     = hiera(secure_mountpoint_var, $ext_secure_mountpoint_home)
   $remove_users               = hiera(remove_users, $ext_remove_users)
   $remove_groups              = hiera(remove_groups, $ext_remove_groups)
+  $rootsh_enabled             = hiera(rootsh_enabled, $ext_rootsh_enabled)
 
   include secc_os_linux::audit
 
@@ -51,7 +53,9 @@ class secc_os_linux (
 
   include secc_os_linux::profile
 
-  include secc_os_linux::rootsh
+  if ( $rootsh_enabled ) {
+    include secc_os_linux::rootsh
+  }
 
   include secc_os_linux::services
 
