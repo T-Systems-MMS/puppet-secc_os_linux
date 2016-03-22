@@ -11,16 +11,6 @@ class secc_os_linux::audit {
     source => 'puppet:///modules/secc_os_linux/etc/sysconfig/bash-prompt-xterm',
   }
 
-  # SLES
-  if ( $::operatingsystem == 'SLES' )  {
-    file { '/etc/bash.bashrc.local':
-      ensure => present,
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0644',
-      source => 'puppet:///modules/secc_os_linux/etc/sles_bash.bashrc.local',
-    }
-  }
 
   # RHEL or CentOS
   if ( $::operatingsystem == 'RedHat' ) or ( $::operatingsystem == 'CentOS' ) {

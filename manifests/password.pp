@@ -92,19 +92,6 @@ class secc_os_linux::password {
           after  => 'auth        required      pam_env.so',
         }
       }
-    } elsif ( $::operatingsystem == 'SLES' ) {
-      file_line { 'sles_common-password' :
-        ensure => present,
-        path   => '/etc/pam.d/common-password',
-        line   => 'password requisite       pam_cracklib.so retry=3 minlen=10 dcredit=-1 ucredit=-1 lcredit=-1 ocredit=-1',
-        match  => '^password.*requisite.*',
-      }
-      file_line { 'sles_common-auth' :
-        ensure => present,
-        path   => '/etc/pam.d/common-auth',
-        line   => 'auth    required        pam_tally2.so onerr=fail deny=3 unlock_time=300',
-        after  => 'auth    required        pam_unix',
-      }
     }
 
 }

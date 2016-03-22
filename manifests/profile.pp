@@ -12,19 +12,6 @@ class secc_os_linux::profile {
 
   # non interactive sessions could effect application behaviours and are not affected by default
   # this is for non-interactive logins
-  if ( $::operatingsystem == 'SLES' )  {
-      if ( $::operatingsystemrelease  >= '11.0' ){
-        if ( $::operatingsystemrelease  < '12.0' ){
-          file_line { 'etc_pamd_common-session' :
-            ensure => present,
-            path   => '/etc/pam.d/common-session',
-            line   => 'session optional        pam_umask.so umask=0027',
-            match  => 'session optional        pam_umask.so',
-          }
-        }
-
-      }
-  }
 
   if ( $::operatingsystem == 'RedHat' ) or ( $::operatingsystem == 'CentOS' )  {
           file_line { 'etc_rhel_bashrc_umask' :
