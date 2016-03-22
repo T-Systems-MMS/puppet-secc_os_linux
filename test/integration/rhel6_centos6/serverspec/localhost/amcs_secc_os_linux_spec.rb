@@ -364,8 +364,10 @@ require 'spec_helper'
 			it { should be_running }
 		end
 		describe file('/etc/rsyslog.conf') do
-			its(:content) { should match /^local6\.\*.* \/var\/log\/bash_history$/ }
 			its(:content) { should match /^authpriv\.\*.* \/var\/log\/secure$/ }
+		end
+		describe file('/etc/rsyslog.d/secc-audit.conf') do
+			its(:content) { should match /^local6\.\*.* \/var\/log\/bash_history$/ }
 		end
 	end
 	
