@@ -7,7 +7,8 @@ class secc_os_linux (
   $ext_secure_mountpoint_var_tmp  = true,
   $ext_secure_mountpoint_home     = true,
   $ext_remove_users               = [ 'ftp', 'games', 'gopher', 'uucp' ],
-  $ext_remove_groups              = [ 'ftp', 'games', 'gopher', 'uucp', 'video', 'tape' ]
+  $ext_remove_groups              = [ 'ftp', 'games', 'gopher', 'uucp', 'video', 'tape' ],
+  $ext_test_kitchen_run           = false,
 ){
 
   $tftp_server_package_status = hiera(tftp_server_package_status, $ext_tftp_server_package_status)
@@ -36,7 +37,8 @@ class secc_os_linux (
     secure_mountpoint_tmp     => $secure_mountpoint_tmp,
     secure_mountpoint_var     => $secure_mountpoint_var,
     secure_mountpoint_var_tmp => $secure_mountpoint_var_tmp,
-    secure_mountpoint_home    => $secure_mountpoint_home
+    secure_mountpoint_home    => $secure_mountpoint_home,
+    test_kitchen_run          => $ext_test_kitchen_run,
   }
 
   include secc_os_linux::password

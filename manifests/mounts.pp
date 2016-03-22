@@ -3,15 +3,22 @@ class secc_os_linux::mounts (
   $secure_mountpoint_tmp,
   $secure_mountpoint_var,
   $secure_mountpoint_var_tmp,
-  $secure_mountpoint_home
+  $secure_mountpoint_home,
+  $test_kitchen_run,
 ){
+
+  # noexec on /tmp prevents test-kitchen :/
+  if ( $test_kitchen_run ) {
+    $tmp_mount_options = 'defaults,nodev,nosuid'
+  } else {
+    $tmp_mount_options = 'defaults,noexec,nodev,nosuid'
+  }
+
 
   if ( $secure_mountpoint_tmp ) {
     mount { '/tmp':
       ensure  => 'mounted',
-      # noexec on /tmp prevents test-kitchen :/
-      #options => 'defaults,nodev,nosuid',
-      options => 'defaults,noexec,nodev,nosuid',
+      options => $tmp_mount_options,
       target  => '/etc/fstab',
       pass    => '2',
     }
