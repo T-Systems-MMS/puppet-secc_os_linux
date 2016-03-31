@@ -21,5 +21,9 @@ metadata
 #   :git => 'https://github.com/puppetlabs/puppetlabs-apt.git',
 #   :ref => '1.4.x'
 
+#mod 'amcs_resolv',
+# :git => 'https://git.t-systems-mms.eu/scm/amcspac/amcs_resolv',
+# :ref => '1.0.0'
+
 # A module from Github pre-packaged tarball
 # mod 'puppetlabs-apache', '0.6.0', :github_tarball => 'puppetlabs/puppetlabs-apache'

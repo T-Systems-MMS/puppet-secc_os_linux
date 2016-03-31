@@ -13,9 +13,7 @@ class secc_os_linux::syslog {
         source => 'puppet:///modules/secc_os_linux/etc/rsyslog.d/secc-audit.conf',
       }
 
-      package { 'rsyslog':
-        ensure => installed,
-      }
+      ensure_packages( ['rsyslog'] )
 
       service { 'rsyslog':
         ensure     => running,
