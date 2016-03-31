@@ -10,6 +10,7 @@ class secc_os_linux (
   $ext_remove_groups              = [ 'ftp', 'games', 'gopher', 'uucp', 'video', 'tape' ],
   $ext_test_kitchen_run           = false,
   $ext_rootsh_enabled             = true,
+  $ext_bash_ps1                   = 'PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\\u\[$(tput setaf 4)\]@\[$(tput setaf 2)\]\\h\[$(tput setaf 4)\]:\[$(tput setaf 7)\]\\w\[$(tput setaf 4)\]\\$ \[$(tput sgr0)\]"',
   $ext_stop_and_disable_services      = [ 'acpid', 'anacron', 'cups', 'dhcpd', 'network-remotefs', 'haldaemon', 'lm_sensors', 'mdmonitor', 'netconsole', 'netfs', 'nfs', 'ntpdate', 'oddjobd', 'portmap', 'portreserve', 'qpidd', 'quota_nld', 'rdisc', 'rhnsd', 'rhsmcertd', 'saslauthd', 'sendmail', 'smartd', 'sysstat', 'vsftpd' ],
   $ext_stop_services                  = [ 'nfslock', 'rpcgssd', 'rpcidmapd', 'rpcsvcgssd' ],
 ){
@@ -23,6 +24,7 @@ class secc_os_linux (
   $remove_users               = hiera(remove_users, $ext_remove_users)
   $remove_groups              = hiera(remove_groups, $ext_remove_groups)
   $rootsh_enabled             = hiera(rootsh_enabled, $ext_rootsh_enabled)
+  $bash_ps1                   = hiera(bash_ps1, $ext_bash_ps1)
   $stop_and_disable_services  = hiera(stop_and_disable_services, $ext_stop_and_disable_services)
   $stop_services              = hiera(stop_services, $ext_stop_services)
 
@@ -57,8 +59,9 @@ class secc_os_linux (
 
   include secc_os_linux::profile
 
-  if ( $rootsh_enabled ) {
-    include secc_os_linux::rootsh
+  class { 'secc_os_linux::rootsh':
+    rootsh_enabled => $rootsh_enabled,
+    bash_ps1       => $bash_ps1,
   }
 
   class { 'secc_os_linux::services':
