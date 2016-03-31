@@ -1,7 +1,10 @@
 # config for service availability and status
 # copied from puppet os hardening module - see hardening.io for details
 
-class secc_os_linux::services {
+class secc_os_linux::services (
+  $stop_and_disable_services,
+  $stop_services
+){
 
   # SoC - Requirement 3.01-1 - Nicht benötigte Dienste und Protokolle müssen deaktiviert werden.
   #    stop: https://git.fedorahosted.org/cgit/aqueduct.git/tree/compliance/puppet/stig/rhel-6/modules/services/manifests/init.pp

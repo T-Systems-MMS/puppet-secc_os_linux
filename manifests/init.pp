@@ -61,7 +61,10 @@ class secc_os_linux (
     include secc_os_linux::rootsh
   }
 
-  include secc_os_linux::services
+  class { 'secc_os_linux::services':
+    stop_and_disable_services => $stop_and_disable_services,
+    stop_services             => $stop_services,
+  }
 
   include secc_os_linux::syslog
 
