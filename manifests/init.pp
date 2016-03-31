@@ -10,6 +10,8 @@ class secc_os_linux (
   $ext_remove_groups              = [ 'ftp', 'games', 'gopher', 'uucp', 'video', 'tape' ],
   $ext_test_kitchen_run           = false,
   $ext_rootsh_enabled             = true,
+  $stop_and_disable_services      = [ 'acpid', 'anacron', 'cups', 'dhcpd', 'network-remotefs', 'haldaemon', 'lm_sensors', 'mdmonitor', 'netconsole', 'netfs', 'nfs', 'ntpdate', 'oddjobd', 'portmap', 'portreserve', 'qpidd', 'quota_nld', 'rdisc', 'rhnsd', 'rhsmcertd', 'saslauthd', 'sendmail', 'smartd', 'sysstat', 'vsftpd' ],
+  $stop_services                  = [ 'nfslock', 'rpcgssd', 'rpcidmapd', 'rpcsvcgssd' ],
 ){
 
   $tftp_server_package_status = hiera(tftp_server_package_status, $ext_tftp_server_package_status)
