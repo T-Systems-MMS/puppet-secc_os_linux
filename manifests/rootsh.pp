@@ -15,13 +15,13 @@ class secc_os_linux::rootsh (
       }
     }
 
-    file_line { '/etc/bashrc_ps1_prompt' :
-      ensure => present,
-      path   => '/etc/bashrc',
-      line   => $bash_ps1,
-      match  => $bash_ps1,
-      after  => '# vim:ts=4:sw=4',
-    }
+    #file_line { '/etc/bashrc_ps1_prompt' :
+    #  ensure => present,
+    #  path   => '/etc/bashrc',
+    #  line   => $bash_ps1,
+    #  match  => $bash_ps1,
+    #  after  => '# vim:ts=4:sw=4',
+    #}
 
 
   }
