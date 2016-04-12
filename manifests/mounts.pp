@@ -48,7 +48,7 @@ class secc_os_linux::mounts (
       device  => '/tmp',
       fstype  => 'none',
       options => 'bind',
-      pass    => '3',
+      pass    => '0',
     }
   }
 
