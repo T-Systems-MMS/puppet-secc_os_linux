@@ -45,7 +45,6 @@ class secc_os_linux::packages (
     [
       'abrtd',
       'autofs',
-      'avahi',
       'avahi-daemon',
       'cpuspeed',  #frequency scaling not supported under xen kernels / vmware unknown / for physical servers it could be relevant
       'ftp',
