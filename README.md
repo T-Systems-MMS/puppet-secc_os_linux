@@ -1,4 +1,4 @@
-﻿# AMCS SecC - Linux OS Module - Version 1.2.1
+﻿# AMCS SecC - Linux OS Module - Version 1.3.7
 
 ####Table of Contents
 

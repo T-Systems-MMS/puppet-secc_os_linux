@@ -365,7 +365,6 @@ class secc_os_linux::kernel (
 
   }
 
-
   exec { 'sysctl_load':
     command     => '/sbin/sysctl -p /etc/sysctl.conf',
     refreshonly => true,

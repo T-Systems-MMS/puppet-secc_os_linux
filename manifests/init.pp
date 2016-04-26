@@ -1,18 +1,19 @@
 # SecC Linux OS Hardening
 class secc_os_linux (
-  $ext_tftp_server_package_status = absent,
-  $ext_xinetd_package_status      = absent,
-  $ext_secure_mountpoint_tmp      = true,
-  $ext_secure_mountpoint_var      = true,
-  $ext_secure_mountpoint_var_tmp  = true,
-  $ext_secure_mountpoint_home     = true,
-  $ext_remove_users               = [ 'ftp', 'games', 'gopher', 'uucp' ],
-  $ext_remove_groups              = [ 'ftp', 'games', 'gopher', 'uucp', 'video', 'tape' ],
-  $ext_test_kitchen_run           = false,
-  $ext_rootsh_enabled             = true,
-  $ext_bash_ps1                   = 'PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\\u\[$(tput setaf 4)\]@\[$(tput setaf 2)\]\\h\[$(tput setaf 4)\]:\[$(tput setaf 7)\]\\w\[$(tput setaf 4)\]\\$ \[$(tput sgr0)\]"',
-  $ext_stop_and_disable_services  = [ 'acpid', 'anacron', 'cups', 'dhcpd', 'network-remotefs', 'haldaemon', 'lm_sensors', 'mdmonitor', 'netconsole', 'netfs', 'nfs', 'ntpdate', 'oddjobd', 'portmap', 'portreserve', 'qpidd', 'quota_nld', 'rdisc', 'rhnsd', 'rhsmcertd', 'saslauthd', 'sendmail', 'smartd', 'sysstat', 'vsftpd' ],
-  $ext_stop_services              = [ 'nfslock', 'rpcgssd', 'rpcidmapd', 'rpcsvcgssd' ],
+  $ext_tftp_server_package_status      = absent,
+  $ext_xinetd_package_status           = absent,
+  $ext_secure_mountpoint_tmp           = true,
+  $ext_secure_mountpoint_var           = true,
+  $ext_secure_mountpoint_var_tmp       = true,
+  $ext_secure_mountpoint_home          = true,
+  $ext_remove_users                    = [ 'ftp', 'games', 'gopher', 'uucp' ],
+  $ext_remove_groups                   = [ 'ftp', 'games', 'gopher', 'uucp', 'video', 'tape' ],
+  $ext_test_kitchen_run                = false,
+  $ext_rootsh_enabled                  = true,
+  $ext_bash_ps1                        = 'PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\\u\[$(tput setaf 4)\]@\[$(tput setaf 2)\]\\h\[$(tput setaf 4)\]:\[$(tput setaf 7)\]\\w\[$(tput setaf 4)\]\\$ \[$(tput sgr0)\]"',
+  $ext_stop_and_disable_services       = [ 'acpid', 'anacron', 'cups', 'dhcpd', 'network-remotefs', 'haldaemon', 'lm_sensors', 'mdmonitor', 'netconsole', 'netfs', 'nfs', 'ntpdate', 'oddjobd', 'portmap', 'portreserve', 'qpidd', 'quota_nld', 'rdisc', 'rhnsd', 'rhsmcertd', 'saslauthd', 'sendmail', 'smartd', 'sysstat', 'vsftpd' ],
+  $ext_stop_services                   = [ 'nfslock', 'rpcgssd', 'rpcidmapd', 'rpcsvcgssd' ],
+  $ext_rsyslog_setting_var_log_messages = '*.info;mail.none;authpriv.none;cron.none;local5.none;local6.none',
 ){
 
   $tftp_server_package_status = hiera(tftp_server_package_status, $ext_tftp_server_package_status)
@@ -27,6 +28,7 @@ class secc_os_linux (
   $bash_ps1                   = hiera(bash_ps1, $ext_bash_ps1)
   $stop_and_disable_services  = hiera(stop_and_disable_services, $ext_stop_and_disable_services)
   $stop_services              = hiera(stop_services, $ext_stop_services)
+  $rsyslog_setting_var_log_messages = hiera(rsyslog_setting_var_log_messages, $ext_rsyslog_setting_var_log_messages)
 
   include secc_os_linux::audit
 
@@ -69,7 +71,9 @@ class secc_os_linux (
     stop_services             => $stop_services,
   }
 
-  include secc_os_linux::syslog
+  class { 'secc_os_linux::syslog':
+    rsyslog_setting_var_log_messages => $rsyslog_setting_var_log_messages,
+  }
 
   class { 'secc_os_linux::users_group':
     remove_users  => $remove_users,
