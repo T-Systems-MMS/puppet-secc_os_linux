@@ -19,10 +19,6 @@ if Facter.value(:osfamily) != 'windows'
   # os-specific rpm command
   if Facter.value(:osfamily) == 'RedHat'
     kernel_grep = Facter::Core::Execution.exec('rpm -qa --last |egrep "kernel-[0-9]" | head -n1')
-
-  # os-specific rpm command
-  elsif Facter.value(:osfamily) == 'Suse'
-    kernel_grep = Facter::Core::Execution.exec('rpm -qa --last |egrep "kernel-default-[0-9]" | head -n1')
   end
 
   # separate and format output of rpm command in version, last_update, last_update_unixtime

@@ -8,6 +8,7 @@ class secc_os_linux (
   $ext_secure_mountpoint_home          = true,
   $ext_remove_users                    = [ 'ftp', 'games', 'gopher', 'uucp' ],
   $ext_remove_groups                   = [ 'ftp', 'games', 'gopher', 'uucp', 'video', 'tape' ],
+  $ext_remove_packages                 = [ 'abrtd', 'autofs', 'avahi-daemon', 'cpuspeed', 'ftp', 'inetd', 'kdump', 'rlogin', 'rsh-server', 'telnet-server', 'ypserv', 'ypbind', 'aic94xx-firmware', 'atmel-firmware', 'adaptec-firmware', 'bfa-firmware', 'brocade-firmware', 'icom-firmware', 'ipw-firmware', 'ipw2100-firmware', 'ipw2200-firmware', 'ivtv-firmware', 'iwl100-firmware', 'iwl105-firmware', 'iwl135-firmware', 'iwl1000-firmware', 'iwl2000-firmware', 'iwl2030-firmware', 'iwl3160-firmware', 'iwl3945-firmware', 'iwl4965-firmware', 'iwl5000-firmware', 'iwl5150-firmware', 'iwl6000-firmware', 'iwl6000g2a-firmware', 'iwl6000g2b-firmware', 'iwl6050-firmware', 'iwl7260-firmware', 'iwl7265-firmware', 'libertas-sd8686-firmware', 'libertas-sd8787-firmware', 'libertas-usb8388-firmware', 'mpt-firmware', 'ql2100-firmware', 'ql2200-firmware', 'ql23xx-firmware', 'ql2400-firmware', 'ql2500-firmware', 'rt61pci-firmware', 'rt73usb-firmware', 'xorg-x11-drv-ati-firmware', 'zd1211-firmware'],
   $ext_test_kitchen_run                = false,
   $ext_rootsh_enabled                  = true,
   $ext_bash_ps1                        = 'PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\\u\[$(tput setaf 4)\]@\[$(tput setaf 2)\]\\h\[$(tput setaf 4)\]:\[$(tput setaf 7)\]\\w\[$(tput setaf 4)\]\\$ \[$(tput sgr0)\]"',
@@ -18,6 +19,7 @@ class secc_os_linux (
 
   $tftp_server_package_status = hiera(tftp_server_package_status, $ext_tftp_server_package_status)
   $xinetd_package_status      = hiera(xinetd_package_status, $ext_xinetd_package_status)
+  $remove_packages            = hiera(remove_packages, $ext_remove_packages)
   $secure_mountpoint_tmp      = hiera(secure_mountpoint_tmp, $ext_secure_mountpoint_tmp)
   $secure_mountpoint_var      = hiera(secure_mountpoint_var, $ext_secure_mountpoint_var)
   $secure_mountpoint_var_tmp  = hiera(secure_mountpoint_var_tmp, $ext_secure_mountpoint_var_tmp)
@@ -56,6 +58,7 @@ class secc_os_linux (
   class { 'secc_os_linux::packages':
     tftp_server_package_status => $tftp_server_package_status,
     xinetd_package_status      => $xinetd_package_status,
+    remove_packages            => $remove_packages,
   }
   #include secc_os_linux::packages
 

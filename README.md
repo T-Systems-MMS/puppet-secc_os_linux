@@ -1,4 +1,4 @@
-﻿# AMCS SecC - Linux OS Module - Version 1.3.7
+﻿# AMCS SecC - Linux OS Module
 
 ####Table of Contents
 
@@ -68,4 +68,5 @@ Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status
 - 1.2.0 added CIS compliant mount point configurations and disabled firewall and usb storage kernel modules
 - 1.3.0 removed the not needed SLES stuff, moved rsyslog config to own file under /etc/rsyslog.d/, removed non needed files from module
 - next: iptables integration (maybe own module) or augeas instead of file_line
+- changes can be found in Git
 
