@@ -15,9 +15,9 @@
 
 require 'facter'
 if Facter.value(:osfamily) != 'windows'
-  
+
   # os-specific rpm command
-  if Facter.value(:osfamily) == 'RedHat'
+  if Facter.value(:osfamily) == 'RedHat' && Facter.value(:os)['release']['major'].to_i > 5
     kernel_grep = Facter::Core::Execution.exec('rpm -qa --last |egrep "kernel-[0-9]" | head -n1')
   end
 
