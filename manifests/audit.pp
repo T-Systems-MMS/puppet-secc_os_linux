@@ -46,8 +46,8 @@ class secc_os_linux::audit {
   file_line { '/etc/bashrc_secc_histcontrol' :
     ensure => present,
     path   => '/etc/bashrc',
-    line   => 'export HISTCONTROL=',
-    match  => 'export HISTCONTROL=',
+    line   => 'export HISTCONTROL= 2>/dev/null',
+    match  => 'export HISTCONTROL=.*',
   } ->
 
   file_line { '/etc/bashrc_secc_histcontrol_typeset' :
@@ -60,8 +60,8 @@ class secc_os_linux::audit {
   file_line { '/etc/bashrc_secc_histfile' :
     ensure => present,
     path   => '/etc/bashrc',
-    line   => 'export HISTFILE=$HOME/.bash_history',
-    match  => 'export HISTFILE=$HOME/.bash_history',
+    line   => 'export HISTFILE=$HOME/.bash_history 2>/dev/null',
+    match  => 'export HISTFILE=.*',
   } ->
 
   file_line { '/etc/bashrc_secc_histfile_typeset':
@@ -74,8 +74,8 @@ class secc_os_linux::audit {
   file_line { '/etc/bashrc_secc_histfilesize':
     ensure => present,
     path   => '/etc/bashrc',
-    line   => 'export HISTFILESIZE=5000',
-    match  => 'export HISTFILESIZE=5000',
+    line   => 'export HISTFILESIZE=5000 2>/dev/null',
+    match  => 'export HISTFILESIZE=.*',
   } ->
 
   file_line { '/etc/bashrc_secc_histfilesize_typeset':
@@ -88,8 +88,8 @@ class secc_os_linux::audit {
   file_line { '/etc/bashrc_secc_histignore':
     ensure => present,
     path   => '/etc/bashrc',
-    line   => 'export HISTIGNORE=',
-    match  => 'export HISTIGNORE=',
+    line   => 'export HISTIGNORE= 2>/dev/null',
+    match  => 'export HISTIGNORE=.*',
   } ->
 
   file_line { '/etc/bashrc_secc_histignore_typeset':
@@ -102,8 +102,8 @@ class secc_os_linux::audit {
   file_line { '/etc/bashrc_secc_histsize':
     ensure => present,
     path   => '/etc/bashrc',
-    line   => 'export HISTSIZE=2500',
-    match  => 'export HISTSIZE=2500',
+    line   => 'export HISTSIZE=2500 2>/dev/null',
+    match  => 'export HISTSIZE=.*',
   } ->
 
   file_line { '/etc/bashrc_secc_histsize_typeset':
@@ -116,8 +116,8 @@ class secc_os_linux::audit {
   file_line { '/etc/bashrc_secc_histtimeformat':
     ensure => present,
     path   => '/etc/bashrc',
-    line   => 'export HISTTIMEFORMAT="%F - %H:%M:%S "',
-    match  => 'export HISTTIMEFORMAT="%F - %H:%M:%S "',
+    line   => 'export HISTTIMEFORMAT="%F - %H:%M:%S " 2>/dev/null',
+    match  => 'export HISTTIMEFORMAT=.*',
   } ->
 
   file_line { '/etc/bashrc_secc_histtimeformat_typeset':
