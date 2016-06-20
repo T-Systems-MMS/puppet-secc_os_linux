@@ -12,7 +12,7 @@
 ##Overview
 Dieses Modul bietet eine Abdeckung der SoC Anforderungen für Linux
 
-[Fragen, Anmerkungen koennen über Jira gestellt werden.](https://projectcenter.t-systems-mms.eu/jira/secure/CreateIssueDetails!init.jspa?pid=15993&summary=secc_os_linux%20changeme&assignee=rkno&issuetype=13&priority=5&description=Beschreibung&components=21137)
+! [Fragen, Anmerkungen koennen über Jira gestellt werden.](https://projectcenter.t-systems-mms.eu/jira/secure/CreateIssueDetails!init.jspa?pid=15993&summary=secc_os_linux%20changeme&assignee=rkno&issuetype=13&priority=5&description=Beschreibung&components=21137)
 
 ##Module Description
 Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status via chkconfig bzw. deren Existenz (z.B. telnet), /etc/login.defs, /etc/pam.d/system-auth, /etc/pam.d/system-auth und  als auch XXXX.
