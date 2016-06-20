@@ -1,4 +1,4 @@
-﻿# AMCS SecC - Linux OS Module
+﻿# AMCS SecC - Linux OS Hardening Modul
 
 ####Table of Contents
 
@@ -11,6 +11,7 @@
 
 ##Overview
 Dieses Modul bietet eine Abdeckung der SoC Anforderungen für Linux
+
 Für [Fragen/ Anmerkungen](https://projectcenter.t-systems-mms.eu/jira/secure/CreateIssueDetails!init.jspa?pid=15993&summary=secc_os_linux%20changeme&assignee=rkno&issuetype=13&priority=5&description=Beschreibung&components=21137&reporter=self)
 
 ##Module Description
