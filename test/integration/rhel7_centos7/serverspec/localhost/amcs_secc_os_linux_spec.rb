@@ -329,14 +329,14 @@ require 'spec_helper'
 
   # /etc/login.defs settings
   describe file('/etc/login.defs') do
-    its(:content) { should match /^PASS_MIN_DAYS       0$/ }
-
+    its(:content) { should match /^PASS_MIN_DAYS\s*0$/ }
+    its(:content) { should match /^UMASK 077$/ }
     its(:content) { should match /^ENCRYPT_METHOD SHA512$/ }
+
     its(:content) { should_not match /ENCRYPT_METHOD MD5/ }
     its(:content) { should_not match /ENCRYPT_METHOD SHA256/ }
     its(:content) { should_not match /ENCRYPT_METHOD DES/ }
 
-    its(:content) { should match /^UMASK 077$/ }
   end
 
   # password policy and lockout
@@ -465,14 +465,6 @@ require 'spec_helper'
     its(:content) { should match /^install hfsplus       \/bin\/false$/ }
     its(:content) { should match /^install squashfs      \/bin\/false$/ }
     its(:content) { should match /^install udf           \/bin\/false$/ }
-  end
-
-  # checking for rootsh - redhat derivates only
-  if (os[:family] == 'redhat')
-  # describe command('w | awk -F\' \' \'{print $8}\'') do
-  #   its(:stdout) { should match /rootsh/ }
-  #   its(:stdout) { should_not match /\/bin\/bash/ }
-  # end
   end
 
   # mounts
