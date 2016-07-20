@@ -1,0 +1,13 @@
+###########################################
+### MANAGED BY PUPPET ['secc_os_linux'] ###
+###     DON'T CHANGE THIS FILE HERE     ###
+###      DO IT ON THE PUPPET MASTER!    ###
+###########################################
+
+/var/log/bash_history {
+<%= @logrotate_time %>
+rotate <%= @logrotate_rotate %>
+<% if @logrotate_missingok -%>missingok<% end %>
+<% if @logrotate_dateext -%>dateext<% end %>
+<% if @logrotate_compress -%>compress<% end %>
+}

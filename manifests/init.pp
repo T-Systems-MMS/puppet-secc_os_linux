@@ -15,6 +15,13 @@ class secc_os_linux (
   $ext_stop_and_disable_services       = [ 'acpid', 'anacron', 'cups', 'dhcpd', 'network-remotefs', 'haldaemon', 'lm_sensors', 'mdmonitor', 'netconsole', 'netfs', 'nfs', 'ntpdate', 'oddjobd', 'portmap', 'portreserve', 'qpidd', 'quota_nld', 'rdisc', 'rhnsd', 'rhsmcertd', 'saslauthd', 'sendmail', 'smartd', 'sysstat', 'vsftpd' ],
   $ext_stop_services                   = [ 'nfslock', 'rpcgssd', 'rpcidmapd', 'rpcsvcgssd' ],
   $ext_rsyslog_setting_var_log_messages = '*.info;mail.none;authpriv.none;cron.none;local5.none;local6.none',
+  $ext_logrotate_enabled               = true,
+  $ext_logrotate_time                  = 'weekly',
+  $ext_logrotate_rotate                = '13',
+  $ext_logrotate_missingok             = false,
+  $ext_logrotate_dateext               = false,
+  $ext_logrotate_compress              = false,  
+  $ext_logrotate_package               = 'logrotate',
 ){
 
   $tftp_server_package_status = hiera(tftp_server_package_status, $ext_tftp_server_package_status)
@@ -31,6 +38,7 @@ class secc_os_linux (
   $stop_and_disable_services  = hiera(stop_and_disable_services, $ext_stop_and_disable_services)
   $stop_services              = hiera(stop_services, $ext_stop_services)
   $rsyslog_setting_var_log_messages = hiera(rsyslog_setting_var_log_messages, $ext_rsyslog_setting_var_log_messages)
+  $logrotate_enabled          = hiera(logrotate_enabled, $ext_logrotate_enabled)
 
   include secc_os_linux::audit
 
@@ -81,6 +89,16 @@ class secc_os_linux (
   class { 'secc_os_linux::users_group':
     remove_users  => $remove_users,
     remove_groups => $remove_groups,
+  }
+  
+  class { 'secc_os_linux::logrotate':
+    logrotate_enabled   => $ext_logrotate_enabled,
+    logrotate_time      => $ext_logrotate_time,
+    logrotate_rotate    => $ext_logrotate_rotate,
+    logrotate_missingok => $ext_logrotate_missingok,
+    logrotate_dateext   => $ext_logrotate_dateext,
+    logrotate_compress  => $ext_logrotate_compress,
+    logrotate_package   => $ext_logrotate_package,
   }
 
 }
