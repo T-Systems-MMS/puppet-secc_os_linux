@@ -251,6 +251,13 @@ class secc_os_linux::kernel (
       line   => 'net.ipv4.conf.all.arp_announce = 2',
       match  => 'net.ipv4.conf.all.arp_announce.*',
       notify => Exec['sysctl_load'],
+
+    file_line { 'kernel_IPv4_arp_announce_interface' :
+      ensure => present,
+      path   => '/etc/sysctl.conf',
+      line   => 'net.ipv4.conf.default.arp_announce = 2',
+      match  => 'net.ipv4.conf.default.arp_announce.*',
+      notify => Exec['sysctl_load'],
     }
 
   } else {
@@ -268,6 +275,14 @@ class secc_os_linux::kernel (
         path   => '/etc/sysctl.conf',
         line   => 'net.ipv4.conf.all.arp_announce = 2',
         match  => 'net.ipv4.conf.all.arp_announce.*',
+        notify => Exec['sysctl_load'],
+      }
+
+      file_line { 'kernel_IPv4_arp_announce_interface' :
+        ensure => present,
+        path   => '/etc/sysctl.conf',
+        line   => 'net.ipv4.conf.default.arp_announce = 2',
+        match  => 'net.ipv4.conf.default.arp_announce.*',
         notify => Exec['sysctl_load'],
       }
 
