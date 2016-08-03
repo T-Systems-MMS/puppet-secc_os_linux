@@ -6,19 +6,18 @@ class secc_os_linux::rootsh (
   $bash_ps1,
 ) {
 
-  if ( $::operatingsystem == 'RedHat' ) or ( $::operatingsystem == 'CentOS' ) {
-
+  if ( $::operatingsystem == 'RedHat' and $::operatingsystemmajrelease >= '6') or ( $::operatingsystem == 'CentOS' and $::operatingsystemmajrelease >= '6') {
     # requires epel repo
-    if ( $rootsh_enabled ) {
-      package { 'rootsh':
-        ensure => 'present',
+      if ( $rootsh_enabled ) {
+        package { 'rootsh':
+          ensure => 'present',
+        }
+      } 
+      else {
+        package { 'rootsh':
+          ensure => 'absent',
+        }
       }
-    } 
-    else {
-      package { 'rootsh':
-      ensure => 'absent',
-      }
-    }
 
     #file_line { '/etc/bashrc_ps1_prompt' :
     #  ensure => present,
@@ -27,7 +26,6 @@ class secc_os_linux::rootsh (
     #  match  => $bash_ps1,
     #  after  => '# vim:ts=4:sw=4',
     #}
-
 
   }
 }

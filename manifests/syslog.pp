@@ -6,7 +6,7 @@ class secc_os_linux::syslog (
   $rsyslog_setting_var_log_messages,
 ){
 
-  if ( $::operatingsystem == 'RedHat' ) or ( $::operatingsystem == 'CentOS' ) {
+  if ( $::operatingsystem == 'RedHat' and $::operatingsystemmajrelease >= '6') or ( $::operatingsystem == 'CentOS' and $::operatingsystemmajrelease >= '6') {
       file { '/etc/rsyslog.d/secc-audit.conf':
         ensure => present,
         owner  => 'root',
@@ -35,8 +35,8 @@ class secc_os_linux::syslog (
         require => Service['rsyslog'],
         #notify  => Service['rsyslog'],
       }
+      
   }
-
 }
 
 

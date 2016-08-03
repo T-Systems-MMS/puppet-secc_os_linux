@@ -358,7 +358,7 @@ require 'spec_helper'
 	end
 	
 # syslog settings 
-	if (os[:family] == 'redhat')
+	if ( (os[:family] == 'redhat') && (os[:release] >= '6') )
 		describe service('rsyslog') do
 			it { should be_enabled }
 			it { should be_running }
