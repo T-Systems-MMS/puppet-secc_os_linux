@@ -10,7 +10,7 @@ class secc_os_linux::logrotate (
   
   if ($logrotate_enabled) {
     
-    ensure_packages(["${logrotate_package}"], {'ensure' => 'installed'})
+    ensure_packages(["${logrotate_package}"])
     
     file {'/etc/logrotate.d/bash_history':
       ensure  => 'present',

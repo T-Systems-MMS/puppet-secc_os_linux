@@ -489,11 +489,6 @@ require 'spec_helper'
     it { should be_mounted.with( :options => { :nodev => true } ) }
   end
 
-  # req. 17 / 3_21 Unix
-  describe file('/var/log') do
-    it { should be_mounted }
-  end
-
   describe command('mount | grep /var/tmp') do
     its(:stdout) { should match /\/var\/tmp/ }
   end
