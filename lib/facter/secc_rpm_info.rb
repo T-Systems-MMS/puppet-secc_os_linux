@@ -11,21 +11,18 @@
 
 require 'facter'
 Facter.add(:secc_rpm_info, :type => :aggregate) do
-  confine do
-    if Facter.value(:osfamily) != 'windows' and ( Facter.value(:osfamily) == 'RedHat' && Facter.value(:os)['release']['major'].to_i > 5 )
-      package_grep = Facter::Util::Resolution.exec('rpm -qa --queryformat "%{NAME},%{VERSION}%{RELEASE};"')
-      arr_ws = package_grep.split(";")
+  confine :kernel => 'Linux'
+  if Facter.value(:osfamily) == 'RedHat' && Facter.value(:os)['release']['major'].to_i > 5
+    package_grep = Facter::Util::Resolution.exec('rpm -qa --queryformat "%{NAME},%{VERSION}%{RELEASE};"')
 
-      arr_wc = []
-      (0...arr_ws.length).each do |i|
-        arr_wc.push(arr_ws[i].split(","))
-      end
+    secc_rpm_info_hash = {}
+    package_grep.split(";").each do |i|
+      split_info = i.split(",")
+      secc_rpm_info_hash[split_info[0]] = split_info[1]
+    end
 
-      chunk(:packageversion) do
-        secc_rpm_info_hash = {}
-        arr_wc.each { |packageversion, version| secc_rpm_info_hash[packageversion] = version}
-        secc_rpm_info_hash
-      end
+    chunk(:packageversion) do
+      secc_rpm_info_hash
     end
   end
 end
