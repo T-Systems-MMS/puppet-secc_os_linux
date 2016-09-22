@@ -5,7 +5,6 @@ class secc_os_linux::logrotate (
   $logrotate_missingok,
   $logrotate_dateext,
   $logrotate_compress,
-  $logrotate_package,
 ) {
   
   if ($logrotate_enabled) {

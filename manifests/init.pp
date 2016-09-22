@@ -21,7 +21,6 @@ class secc_os_linux (
   $ext_logrotate_missingok             = false,
   $ext_logrotate_dateext               = false,
   $ext_logrotate_compress              = false,  
-  $ext_logrotate_package               = 'logrotate',
 ){
 
   $tftp_server_package_status = hiera(tftp_server_package_status, $ext_tftp_server_package_status)
@@ -98,7 +97,6 @@ class secc_os_linux (
     logrotate_missingok => $ext_logrotate_missingok,
     logrotate_dateext   => $ext_logrotate_dateext,
     logrotate_compress  => $ext_logrotate_compress,
-    logrotate_package   => $ext_logrotate_package,
   }
 
 }
