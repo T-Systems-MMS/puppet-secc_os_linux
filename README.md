@@ -42,10 +42,12 @@ Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status
 - rootsh stellt saubere Loggingmoeglichkeiten auf ssh Ebene zur Verfügung (ausschliesslich Redhat Derivate; leichte Dopplung zu audit )
 - services steuert die Existenz und den Status von Diensten
 - syslog stellt ein standardisiertes von SSH Aktivitäten und Bash-Loggings her (/var/log/secure und /var/log/bash_history)
+- logrotate rotiert bash_history
 
 ##Usage
 - Das Modul sollte 1-zu-1 in die Projekt-Repositories übernommen werden können, aber der Rollout sollte kontrolliert über die einzelnen Umgebungen Richtung Live erfolgen.
 - Wichtig ist die Anpassung der Partitionsparameter (secure_mountpoint_*), da sonst das Modul fehlschlagen kann.
+- um die Funktion von logrotate sicherzustellen, muss das Package wenn es nicht schon installiert ist manuell installiert werden
 
 ###Usage ohne Puppet
 - Eine Copy&Paste Übernahme in Projekte ist nicht möglich, aber die notwendigen Parameter sind anhand der Manifeste und Templates auslesbar.
