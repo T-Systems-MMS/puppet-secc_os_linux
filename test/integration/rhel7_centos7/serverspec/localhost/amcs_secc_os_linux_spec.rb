@@ -323,6 +323,7 @@ require 'spec_helper'
   # req. 21 / 3_21 Unix
   describe command('umask') do
     its(:stdout) { should match /^0027$/ }
+  end
   describe file('/etc/profile') do
     its(:content) { should match /umask 027/ }
     its(:content) { should_not match /umask 022/ }
