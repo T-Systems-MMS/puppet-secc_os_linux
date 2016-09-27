@@ -533,6 +533,6 @@ require 'spec_helper'
 
   # req. 20 / 3_21 unix
   # search for files that are writable be its group or others and are executable
-  describe command('find /bin /sbin /usr /root /etc /lib /var -type f -perm /go=w -perm /a=x') do
+  describe command('find /bin /sbin /usr /root /etc /lib /var -type f -perm /go=w -perm /a=x -not ( -path "/usr/local/rvm/*" )') do
     its(:stdout) { should be_empty }
   end
