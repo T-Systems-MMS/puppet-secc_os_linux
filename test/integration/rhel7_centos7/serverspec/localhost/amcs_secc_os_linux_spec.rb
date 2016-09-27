@@ -19,12 +19,13 @@ require 'spec_helper'
     context linux_kernel_parameter('net.ipv6.conf.all.disable_ipv6') do
       its(:value) { should_not eq 0 }
     end
-
+    # req. 5 / 3_21 Unix
     context linux_kernel_parameter('net.ipv4.ip_forward') do
       its(:value) { should eq 0 }
     end
     # req. 21 / 3_37 Betriebssysteme
     # req. 13 / 3_21 Unix
+    # req. 34 / 3_21 Unix
     context linux_kernel_parameter('net.ipv4.conf.all.rp_filter') do
       its(:value) { should eq 1 }
     end
@@ -33,6 +34,7 @@ require 'spec_helper'
     context linux_kernel_parameter('net.ipv4.conf.default.rp_filter') do
       its(:value) { should eq 1 }
     end
+    # req. 5 / 3_21 Unix
     context linux_kernel_parameter('net.ipv4.icmp_echo_ignore_broadcasts') do
       its(:value) { should eq 1 }
     end
@@ -127,6 +129,7 @@ require 'spec_helper'
   describe package('abrtd') do
     it { should_not be_installed }
   end
+  # req 14 / 3_21 Unix
   describe package('autofs') do
     it { should_not be_installed }
   end
@@ -214,6 +217,7 @@ require 'spec_helper'
     it { should_not be_enabled }
     it { should_not be_running }
   end
+  # req 14 / 3_21 Unix
   describe service('autofs') do
     it { should_not be_enabled }
     it { should_not be_running }
@@ -316,15 +320,16 @@ require 'spec_helper'
   end
 
   # profile setting for default umask
+  # req. 21 / 3_21 Unix
+  describe command('umask') do
+    its(:stdout) { should match /^0027$/ }
+  end
   describe file('/etc/profile') do
     its(:content) { should match /umask 027/ }
     its(:content) { should_not match /umask 022/ }
   end
-
-  # umask setting
-  # req. 21 / 3_21 Unix
-  describe command('umask') do
-    its(:stdout) { should match /^0027$/ }
+  describe file('/etc/bashrc') do
+    its(:content) { should match /umask 027/ }
   end
 
   # /etc/login.defs settings
@@ -332,11 +337,9 @@ require 'spec_helper'
     its(:content) { should match /^PASS_MIN_DAYS\s*0$/ }
     its(:content) { should match /^UMASK 077$/ }
     its(:content) { should match /^ENCRYPT_METHOD SHA512$/ }
-
     its(:content) { should_not match /ENCRYPT_METHOD MD5/ }
     its(:content) { should_not match /ENCRYPT_METHOD SHA256/ }
     its(:content) { should_not match /ENCRYPT_METHOD DES/ }
-
   end
 
   # password policy and lockout
@@ -420,6 +423,7 @@ require 'spec_helper'
   # checking for users with empty password (2nd field in /etc/shadow shouldn't be empty,
   # but special characters are okay; http://linux.die.net/man/5/shadow (encrypted passwords)
   # req 27 / 3_37 Betriebssysteme
+  # req 18 / 3_21 Unix
   describe command('awk -F":" \'($2 == "") {print $1}\' /etc/shadow') do
     its(:stdout) { should match /^$/ }
   end
@@ -494,11 +498,11 @@ require 'spec_helper'
   end
 
   describe file ('/etc/logrotate.d/bash_history') do
-  	it { should exist }
+    it { should exist }
   end
 
   describe command('logrotate -dv /etc/logrotate.d/bash_history') do
-  	its(:exit_status) { should eq 0 }
+    its(:exit_status) { should eq 0 }
   end
 
   #describe file('/etc/sudoers') do
@@ -524,5 +528,11 @@ require 'spec_helper'
 
   # req. 48 / 3_21 Unix
   describe command('awk -F: \'{print $3}\' /etc/passwd | sort |uniq -d') do
+    its(:stdout) { should be_empty }
+  end
+
+  # req. 20 / 3_21 unix
+  # search for files that are writable be its group or others and are executable
+  describe command('find /bin /sbin /usr /root /etc /lib /var -type f -perm /go=w -perm /a=x -not ( -path "/usr/local/rvm/*" )') do
     its(:stdout) { should be_empty }
   end
