@@ -27,22 +27,11 @@ class secc_os_linux::packages (
         }
       }
   }
+  
+  ensure_packages( ['tftp-server'], {'ensure' => $tftp_server_package_status} )
+  ensure_packages( ['xinetd'], {'ensure' => $xinetd_package_status} )
 
-  package {
-    [
-      'tftp-server',
-    ]:
-    ensure => $tftp_server_package_status
-  }
-
-  package {
-    [
-      'xinetd',
-    ]:
-    ensure => $xinetd_package_status
-  }
-
-  package {
+  ensure_packages(
     [
       # 'abrtd',
       # 'autofs',
@@ -98,11 +87,11 @@ class secc_os_linux::packages (
       # 'xorg-x11-drv-ati-firmware',
       # 'zd1211-firmware',
       $remove_packages,
-    ]:
-      ensure => 'absent',
-  }
+    ],
+      {'ensure' => 'absent'}
+  )
 
   # packages we need for every service
-  ensure_packages( ['curl', 'wget'] )
+  ensure_packages( ['curl', 'wget'], {'ensure' => 'present'} )
 
 }
