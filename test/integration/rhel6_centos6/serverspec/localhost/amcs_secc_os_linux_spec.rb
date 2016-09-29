@@ -209,10 +209,6 @@ require 'spec_helper'
     it { should_not be_enabled }
     it { should_not be_running }
   end
-  describe service('anacron') do
-    it { should_not be_enabled }
-    it { should_not be_running }
-  end
   describe service('atd') do
     it { should_not be_enabled }
     it { should_not be_running }
@@ -495,10 +491,6 @@ require 'spec_helper'
 
   describe command('mount | grep /var/tmp') do
     its(:stdout) { should match /\/var\/tmp/ }
-  end
-
-  describe command('logrotate -dv /etc/logrotate.d/bash_history') do
-    its(:exit_status) { should eq 0 }
   end
 
   #describe file('/etc/sudoers') do
