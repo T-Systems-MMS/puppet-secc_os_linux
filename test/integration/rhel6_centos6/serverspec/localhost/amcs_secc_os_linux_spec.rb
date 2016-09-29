@@ -497,10 +497,6 @@ require 'spec_helper'
     its(:stdout) { should match /\/var\/tmp/ }
   end
 
-  describe file ('/etc/logrotate.d/bash_history') do
-    it { should exist }
-  end
-
   describe command('logrotate -dv /etc/logrotate.d/bash_history') do
     its(:exit_status) { should eq 0 }
   end
