@@ -21,7 +21,6 @@ class secc_os_linux (
   $ext_logrotate_missingok              = false,
   $ext_logrotate_dateext                = false,
   $ext_logrotate_compress               = false,
-  $ext_cpu_vendor                       = 'intel',
   $ext_enable_ipv4_forwarding           = false,
   $ext_enable_ipv6                      = false,
   $ext_enable_ipv6_forwarding           = false,
@@ -44,7 +43,6 @@ class secc_os_linux (
   $stop_services              = hiera(stop_services, $ext_stop_services)
   $rsyslog_setting_var_log_messages = hiera(rsyslog_setting_var_log_messages, $ext_rsyslog_setting_var_log_messages)
   $logrotate_enabled          = hiera(logrotate_enabled, $ext_logrotate_enabled)
-  $cpu_vendor                 = hiera(cpu_vendor, $ext_cpu_vendor)
   $enable_ipv4_forwarding     = hiera(enable_ipv4_forwarding, $ext_enable_ipv4_forwarding)
   $enable_ipv6                = hiera(enable_ipv6_forwarding, $ext_enable_ipv6)
   $enable_ipv6_forwarding     = hiera(enable_ipv6_forwarding, $ext_enable_ipv6_forwarding)
@@ -59,7 +57,6 @@ class secc_os_linux (
   include secc_os_linux::inputrc
 
   class {'secc_os_linux::kernel':
-    cpu_vendor                => $cpu_vendor,
     enable_ipv4_forwarding    => $enable_ipv4_forwarding,
     enable_ipv6               => $enable_ipv6,
     enable_ipv6_forwarding    => $enable_ipv6_forwarding,
