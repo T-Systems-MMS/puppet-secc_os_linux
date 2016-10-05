@@ -10,12 +10,11 @@
 # SoC - Requirement 3.37-11 - Die Verarbeitung von ICMPv4 und ICMPv6 Paketen, die für den Betrieb nicht benötigt werden, muss deaktiviert werden.
 # SoC - Requirement 3.37-12 - IP-Pakete mit nicht benötigten Optionen oder Erweiterungs-Headern dürfen nicht bearbeitet werden.
 class secc_os_linux::kernel (
-  $cpu_vendor              = 'intel',
-  $enable_ipv4_forwarding  = false,
-  $enable_ipv6             = false,
-  $enable_ipv6_forwarding  = false,
-  $arp_restricted          = true,
-  $enable_stack_protection = true,
+  $enable_ipv4_forwarding,
+  $enable_ipv6,
+  $enable_ipv6_forwarding,
+  $arp_restricted,
+  $enable_stack_protection,
 ){
 
   # Networking
@@ -76,12 +75,22 @@ class secc_os_linux::kernel (
   }
 
   # Only enable IP traffic forwarding, if required.
-  file_line { 'kernel_disable_IPv4_routing' :
-    ensure => present,
-    path   => '/etc/sysctl.conf',
-    line   => 'net.ipv4.ip_forward = 0',
-    match  => 'net.ipv4.ip_forward.*',
-    notify => Exec['sysctl_load'],
+  if $enable_ipv4_forwarding {
+    file_line { 'kernel_disable_IPv4_routing' :
+      ensure => present,
+      path   => '/etc/sysctl.conf',
+      line   => 'net.ipv4.ip_forward = 1',
+      match  => 'net.ipv4.ip_forward.*',
+      notify => Exec['sysctl_load'],
+    }
+  } else {
+    file_line { 'kernel_disable_IPv4_routing' :
+      ensure => present,
+      path   => '/etc/sysctl.conf',
+      line   => 'net.ipv4.ip_forward = 0',
+      match  => 'net.ipv4.ip_forward.*',
+      notify => Exec['sysctl_load'],
+    }
   }
 
   # Enable RFC-recommended source validation feature. It should not be used for routers on complex networks, but is helpful for end hosts and routers serving small networks.
