@@ -10,12 +10,12 @@
 # SoC - Requirement 3.37-11 - Die Verarbeitung von ICMPv4 und ICMPv6 Paketen, die für den Betrieb nicht benötigt werden, muss deaktiviert werden.
 # SoC - Requirement 3.37-12 - IP-Pakete mit nicht benötigten Optionen oder Erweiterungs-Headern dürfen nicht bearbeitet werden.
 class secc_os_linux::kernel (
-  $cpu_vendor              = 'intel',
-  $enable_ipv4_forwarding  = false,
-  $enable_ipv6             = false,
-  $enable_ipv6_forwarding  = false,
-  $arp_restricted          = true,
-  $enable_stack_protection = true,
+  $cpu_vendor,
+  $enable_ipv4_forwarding,
+  $enable_ipv6,
+  $enable_ipv6_forwarding,
+  $arp_restricted,
+  $enable_stack_protection,
 ){
 
   # Networking
