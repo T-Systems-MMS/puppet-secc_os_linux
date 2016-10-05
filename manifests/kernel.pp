@@ -76,12 +76,22 @@ class secc_os_linux::kernel (
   }
 
   # Only enable IP traffic forwarding, if required.
-  file_line { 'kernel_disable_IPv4_routing' :
-    ensure => present,
-    path   => '/etc/sysctl.conf',
-    line   => 'net.ipv4.ip_forward = 0',
-    match  => 'net.ipv4.ip_forward.*',
-    notify => Exec['sysctl_load'],
+  if $enable_ipv4_forwarding {
+    file_line { 'kernel_disable_IPv4_routing' :
+      ensure => present,
+      path   => '/etc/sysctl.conf',
+      line   => 'net.ipv4.ip_forward = 1',
+      match  => 'net.ipv4.ip_forward.*',
+      notify => Exec['sysctl_load'],
+    }
+  } else {
+    file_line { 'kernel_disable_IPv4_routing' :
+      ensure => present,
+      path   => '/etc/sysctl.conf',
+      line   => 'net.ipv4.ip_forward = 0',
+      match  => 'net.ipv4.ip_forward.*',
+      notify => Exec['sysctl_load'],
+    }
   }
 
   # Enable RFC-recommended source validation feature. It should not be used for routers on complex networks, but is helpful for end hosts and routers serving small networks.
