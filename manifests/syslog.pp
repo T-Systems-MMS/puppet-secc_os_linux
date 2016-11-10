@@ -4,6 +4,7 @@
 
 class secc_os_linux::syslog (
   $rsyslog_setting_var_log_messages,
+  $rsyslog_manage_service
 ){
 
   if ( $::operatingsystem == 'RedHat' and $::operatingsystemmajrelease >= '6') or ( $::operatingsystem == 'CentOS' and $::operatingsystemmajrelease >= '6') {
@@ -15,29 +16,25 @@ class secc_os_linux::syslog (
         source => 'puppet:///modules/secc_os_linux/etc/rsyslog.d/secc-audit.conf',
       }
 
-      ensure_packages( ['rsyslog'] )
+      if $rsyslog_manage_service {
 
-      service { 'rsyslog':
-        ensure     => running,
-        hasstatus  => true,
-        hasrestart => true,
-        enable     => true,
-        #subscribe  => [ File['/etc/rsyslog.d/secc-audit.conf'], File['/etc/rsyslog.conf'] ],
-        subscribe  => File['/etc/rsyslog.d/secc-audit.conf'],
-      }
+        ensure_packages( ['rsyslog'] )
 
-      file_line { 'secc_rsyslog_setting_var_log_messages' :
-        ensure  => present,
-        path    => '/etc/rsyslog.conf',
-        line    => "${rsyslog_setting_var_log_messages}   /var/log/messages",
-        #'*.info;mail.none;authpriv.none;cron.none;local5.none;local6.none                /var/log/messages',
-        match   => '.*/var/log/messages',
-        require => Service['rsyslog'],
-        #notify  => Service['rsyslog'],
+	      service { 'rsyslog':
+	        ensure     => running,
+	        hasstatus  => true,
+	        hasrestart => true,
+	        enable     => true,
+	        subscribe  => File['/etc/rsyslog.d/secc-audit.conf'],
+	      }
+
+	      file_line { 'secc_rsyslog_setting_var_log_messages' :
+	        ensure  => present,
+	        path    => '/etc/rsyslog.conf',
+	        line    => "${rsyslog_setting_var_log_messages}   /var/log/messages",
+	        match   => '.*/var/log/messages',
+	        require => Service['rsyslog'],
+	      }
       }
-      
   }
 }
-
-
-

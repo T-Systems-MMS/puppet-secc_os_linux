@@ -3,7 +3,7 @@ Vagrant.configure("2") do |c|
   c.vm.box_url = "<%= config[:box_url] %>"
 
   c.ssh.username = "root"
-  c.ssh.private_key_path = "C:/Users/crgr/Documents/GitHub/np6_ag2_vmtemplates/virtualbox_vagrantbox/kitchen/id_rsa"
+  c.ssh.private_key_path = "C:/tools/geppetto/R.Knochenhauer@t-systems.com/secc_os_linux/id_rsa"
   
   if Vagrant.has_plugin?("vagrant-proxyconf")
     c.proxy.http     = "http://proxy.mms-dresden.de:8080"

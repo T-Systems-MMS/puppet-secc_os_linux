@@ -4,3 +4,4 @@
 .librarian/
 Puppetfile.lock
 /.idea/
+/tools/

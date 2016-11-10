@@ -14,7 +14,8 @@ provisioner:
   http_proxy: http://proxy.mms-dresden.de:8080
   https_proxy: http://proxy.mms-dresden.de:8080
   # certificate 
-  librarian_puppet_ssl_file: 'C:/Users/rkno/Documents/GitHub/secc_os_linux/cacert.pem'
+  # librarian_puppet_ssl_file: 'C:/Users/rkno/Documents/GitHub/secc_os_linux/cacert.pem'
+  librarian_puppet_ssl_file: 'C:/tools/geppetto/R.Knochenhauer@t-systems.com/secc_os_linux/cacert.pem'
 
 platforms:
 - name: centos7
@@ -22,7 +23,7 @@ platforms:
   driver:
     box: centos7
     box_check_update: true
-    box_url: file:///H:/vagrantboxes/packer-centos7-virtualbox-iso.box
+    box_url: https://doimage.mms-at-work.de/TMPLCentOS7/releases/vagrant/TMPLCentOS7_0.3.182016080406_vbox.box
     provision: true
     vagrantfile_erb: Vagrantfile.erb
 

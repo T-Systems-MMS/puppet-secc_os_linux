@@ -26,6 +26,7 @@ class secc_os_linux (
   $ext_enable_ipv6_forwarding           = false,
   $ext_arp_restricted                   = true,
   $ext_enable_stack_protection          = true,
+  $ext_rsyslog_manage_service           = true,
 ){
 
   $tftp_server_package_status = hiera(tftp_server_package_status, $ext_tftp_server_package_status)
@@ -48,6 +49,7 @@ class secc_os_linux (
   $enable_ipv6_forwarding     = hiera(enable_ipv6_forwarding, $ext_enable_ipv6_forwarding)
   $arp_restricted             = hiera(arp_restricted, $ext_arp_restricted)
   $enable_stack_protection    = hiera(enable_stack_protection, $ext_enable_stack_protection)
+  $rsyslog_manage_service     = hiera(rsyslog_manage_service, $ext_rsyslog_manage_service)
 
   include secc_os_linux::audit
 
@@ -62,7 +64,7 @@ class secc_os_linux (
     enable_ipv6_forwarding    => $enable_ipv6_forwarding,
     arp_restricted            => $arp_restricted,
     enable_stack_protection   => $enable_stack_protection,
-  } 
+  }
 
   include secc_os_linux::login_defs
 
@@ -83,7 +85,6 @@ class secc_os_linux (
     xinetd_package_status      => $xinetd_package_status,
     remove_packages            => $remove_packages,
   }
-  #include secc_os_linux::packages
 
   include secc_os_linux::profile
 
@@ -99,13 +100,14 @@ class secc_os_linux (
 
   class { 'secc_os_linux::syslog':
     rsyslog_setting_var_log_messages => $rsyslog_setting_var_log_messages,
+    rsyslog_manage_service           => $rsyslog_manage_service,
   }
 
   class { 'secc_os_linux::users_group':
     remove_users  => $remove_users,
     remove_groups => $remove_groups,
   }
-  
+
   class { 'secc_os_linux::logrotate':
     logrotate_enabled   => $ext_logrotate_enabled,
     logrotate_time      => $ext_logrotate_time,

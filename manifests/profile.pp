@@ -2,12 +2,12 @@
 # copied from puppet os hardening module - see hardening.io for details
 class secc_os_linux::profile {
 
-  file { '/etc/profile.d/umask.sh':
+  file { '/etc/profile.d/secc-umask.sh':
     ensure => present,
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/secc_os_linux/etc/profile.d/umask.sh',
+    source => 'puppet:///modules/secc_os_linux/etc/profile.d/secc-umask.sh',
   }
 
   # non interactive sessions could effect application behaviours and are not affected by default
