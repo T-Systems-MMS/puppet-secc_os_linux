@@ -45,4 +45,11 @@ Facter.add(:secc_kernel_info, :type => :aggregate) do
         {"last_update_unixtime" => last_update_unixtime}
       end
     end
+    
+    if ( Facter.value(:osfamily) == 'Suse' )
+      chunk(:version) do
+        {"version" => "currently not supported"}
+      end
+    
+    end
 end
