@@ -4,7 +4,7 @@ class secc_os_linux::packages (
   $remove_packages,
 ){
 
-  # SoC - Requirement 3.01-3 - Nicht benötigte Software darf nicht installiert oder muss deinstalliert werden.
+  # SoC - Requirement 3.01-3 - Nicht benoetigte Software darf nicht installiert oder muss deinstalliert werden.
 
   # own handling of alsa-firmware, because dependency between those package have to be removed "yum -y erase" and it reduces the risk of unwanted deinstallations
   # not working ...

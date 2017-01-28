@@ -6,9 +6,9 @@ class secc_os_linux::services (
   $stop_services
 ){
 
-  # SoC - Requirement 3.01-1 - Nicht benötigte Dienste und Protokolle müssen deaktiviert werden.
+  # SoC - Requirement 3.01-1 - Nicht benoetigte Dienste und Protokolle muessen deaktiviert werden.
   #    stop: https://git.fedorahosted.org/cgit/aqueduct.git/tree/compliance/puppet/stig/rhel-6/modules/services/manifests/init.pp
-  # SoC - Requirement 3.37-7 - Das automatische Starten von Anwendungen auf Wechseldatenträgern muss abgeschaltet werden.
+  # SoC - Requirement 3.37-7 - Das automatische Starten von Anwendungen auf Wechseldatentraegern muss abgeschaltet werden.
   #     autofs
 
   service {
