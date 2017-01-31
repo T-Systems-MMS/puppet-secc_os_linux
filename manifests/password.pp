@@ -2,10 +2,10 @@
 # copied from puppet os hardening module - see hardening.io for details
 class secc_os_linux::password {
 
-  # SoC - Requirement 3.01-23 - Falls Passwörter als Authentisierungsmerkmal genutzt werden, müssen diese mindestens 8 Zeichen lang sein und drei der folgenden Zeichentypen beinhalten:
-  #       Kleinbuchstaben, Großbuchstaben, Ziffern und Sonderzeichen.
-  # SoC - Requirement 3.01-25 - Falls Passwörter als Authentisierungsmerkmal genutzt werden, muss ein Schutz gegen Wörterbuch- und Brute-Force-Angriffe vorhanden sein,
-  #       der das Erraten von Passwörtern stark erschwert.
+  # SoC - Requirement 3.01-23 - Falls Passwoerter als Authentisierungsmerkmal genutzt werden, muessen diese mindestens 8 Zeichen lang sein und drei der folgenden Zeichentypen beinhalten:
+  #       Kleinbuchstaben, Grossbuchstaben, Ziffern und Sonderzeichen.
+  # SoC - Requirement 3.01-25 - Falls Passwoerter als Authentisierungsmerkmal genutzt werden, muss ein Schutz gegen Woerterbuch- und Brute-Force-Angriffe vorhanden sein,
+  #       der das Erraten von Passwoertern stark erschwert.
 
     if ( $::operatingsystem == 'RedHat' ) or ( $::operatingsystem == 'CentOS' ) {
       if ( $::operatingsystemmajrelease == '6' ) {
