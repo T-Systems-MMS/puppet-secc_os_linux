@@ -25,13 +25,13 @@ class secc_os_linux::password {
         file_line { 'rhel_centos_6_password-auth_fail-lock' :
           ensure => present,
           path   => '/etc/pam.d/password-auth',
-          line   => 'auth        required      pam_tally2.so onerr=fail deny=3 unlock_time=300',
+          line   => 'auth        required      pam_tally2.so onerr=fail deny=5 unlock_time=300',
           after  => 'auth        required      pam_env.so',
         }
         file_line { 'rhel_centos_6_system-auth_fail-lock' :
           ensure => present,
           path   => '/etc/pam.d/system-auth',
-          line   => 'auth        required      pam_tally2.so onerr=fail deny=3 unlock_time=300',
+          line   => 'auth        required      pam_tally2.so onerr=fail deny=5 unlock_time=300',
           after  => 'auth        required      pam_env.so',
         }
 
@@ -82,13 +82,13 @@ class secc_os_linux::password {
         file_line { 'rhel_centos_7_password-auth_fail-lock' :
           ensure => present,
           path   => '/etc/pam.d/password-auth',
-          line   => 'auth        required      pam_tally2.so onerr=fail deny=3 unlock_time=300',
+          line   => 'auth        required      pam_tally2.so onerr=fail deny=5 unlock_time=300',
           after  => 'auth        required      pam_env.so',
         }
         file_line { 'rhel_centos_7_system-auth_fail-lock' :
           ensure => present,
           path   => '/etc/pam.d/system-auth',
-          line   => 'auth        required      pam_tally2.so onerr=fail deny=3 unlock_time=300',
+          line   => 'auth        required      pam_tally2.so onerr=fail deny=5 unlock_time=300',
           after  => 'auth        required      pam_env.so',
         }
       }
