@@ -1,0 +1,37 @@
+###########################################
+### MANAGED BY PUPPET ['secc_os_linux'] ###
+###     DON'T CHANGE THIS FILE HERE     ###
+###      DO IT ON THE PUPPET MASTER!    ###
+###########################################
+
+#
+# Listing a module here prevents the hotplug scripts from loading it.
+# Usually that'd be so that some other driver will bind it instead,
+# no matter which driver happens to get probed first.  Sometimes user
+# mode tools can also control driver binding.
+#
+# Syntax: see modprobe.conf(5).
+#
+
+
+<% @disable_kernel_modules.each do |module| %>
+# blacklist/disable kernel module
+blacklist <%= module %>
+install <%= module %> /bin/false
+<% end -%> 
+
+#blacklist usb-storage
+#blacklist firewire-core
+#blacklist firewire-ohci
+#install usb-storage   /bin/false
+#install firewire-core /bin/false
+#install firewire-ohci /bin/false
+#
+#install cramfs        /bin/false
+#install freevxfs      /bin/false
+#install jffs2         /bin/false
+#install hfs           /bin/false
+#install hfsplus       /bin/false
+#install squashfs      /bin/false
+#install udf           /bin/false
+
