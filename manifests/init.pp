@@ -27,7 +27,7 @@ class secc_os_linux (
   $ext_arp_restricted                   = true,
   $ext_enable_stack_protection          = true,
   $ext_rsyslog_manage_service           = true,
-  $ext_disable_kernel_modules           = ['usb-storage', 'firewire-core', 'firewire-ohci', 'cramfs', 'freevxfs', 'jffs2', 'hfs', 'hfsplus', 'squashfs', 'udf'],
+  $ext_disable_kernel_modules           = [ 'usb-storage', 'firewire-core', 'firewire-ohci', 'cramfs', 'freevxfs', 'jffs2', 'hfs', 'hfsplus', 'squashfs', 'udf' ],
 ){
 
   $tftp_server_package_status = hiera("${module_name}::tftp_server_package_status", $ext_tftp_server_package_status)

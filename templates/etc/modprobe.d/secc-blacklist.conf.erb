@@ -14,24 +14,10 @@
 #
 
 
-<% @disable_kernel_modules.each do |module| %>
-# blacklist/disable kernel module
-blacklist <%= module %>
-install <%= module %> /bin/false
-<% end -%> 
+<% @disable_kernel_modules.each do |kernelmodule| -%>
+# kernelmodule: <%= kernelmodule %>
+blacklist <%= kernelmodule %>
+install <%= kernelmodule %> /bin/false
 
-#blacklist usb-storage
-#blacklist firewire-core
-#blacklist firewire-ohci
-#install usb-storage   /bin/false
-#install firewire-core /bin/false
-#install firewire-ohci /bin/false
-#
-#install cramfs        /bin/false
-#install freevxfs      /bin/false
-#install jffs2         /bin/false
-#install hfs           /bin/false
-#install hfsplus       /bin/false
-#install squashfs      /bin/false
-#install udf           /bin/false
+<% end %>
 
