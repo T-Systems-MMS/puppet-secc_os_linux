@@ -27,6 +27,7 @@ class secc_os_linux (
   $ext_arp_restricted                   = true,
   $ext_enable_stack_protection          = true,
   $ext_rsyslog_manage_service           = true,
+  $ext_disable_kernel_modules           = [ 'usb-storage', 'firewire-core', 'firewire-ohci', 'cramfs', 'freevxfs', 'jffs2', 'hfs', 'hfsplus', 'squashfs', 'udf' ],
 ){
 
   $tftp_server_package_status = hiera("${module_name}::tftp_server_package_status", $ext_tftp_server_package_status)
@@ -50,6 +51,7 @@ class secc_os_linux (
   $arp_restricted             = hiera("${module_name}::arp_restricted", $ext_arp_restricted)
   $enable_stack_protection    = hiera("${module_name}::enable_stack_protection", $ext_enable_stack_protection)
   $rsyslog_manage_service     = hiera("${module_name}::rsyslog_manage_service", $ext_rsyslog_manage_service)
+  $disable_kernel_modules     = hiera("${module_name}::disable_kernel_modules", $ext_disable_kernel_modules)
 
   include secc_os_linux::audit
 
@@ -68,7 +70,9 @@ class secc_os_linux (
 
   include secc_os_linux::login_defs
 
-  include secc_os_linux::modules
+  class { 'secc_os_linux::modules':
+    disable_kernel_modules    => $disable_kernel_modules,
+  }
 
   class { 'secc_os_linux::mounts':
     secure_mountpoint_tmp     => $secure_mountpoint_tmp,
