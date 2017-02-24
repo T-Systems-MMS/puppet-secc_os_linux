@@ -462,6 +462,13 @@ require 'spec_helper'
   end
 
   describe file('/etc/modprobe.d/secc-blacklist.conf') do
+  	its(:content) { should match /^blacklist cramfs$/ }
+    its(:content) { should match /^blacklist freevxfs$/ }
+    its(:content) { should match /^blacklist jffs2$/ }
+    its(:content) { should match /^blacklist hfs$/ }
+    its(:content) { should match /^blacklist hfsplus$/ }
+    its(:content) { should match /^blacklist squashfs$/ }
+    its(:content) { should match /^blacklist udf$/ }
     its(:content) { should match /^install cramfs        \/bin\/false$/ }
     its(:content) { should match /^install freevxfs      \/bin\/false$/ }
     its(:content) { should match /^install jffs2         \/bin\/false$/ }
