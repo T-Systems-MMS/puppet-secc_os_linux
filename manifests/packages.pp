@@ -22,10 +22,16 @@ class secc_os_linux::packages (
         }
       }
   }
-  
+
   # uninstall unwanted packages, configured as default parameter to $ext_remove_packages in init.pp
-  ensure_packages( $remove_packages, {'ensure' => 'absent'} )
-  
+  # handling of special behaviour of centos7, which basically deletes linux-firmware, as dependency of xorg-x11-drv-ati-firmware
+  # tickets ASC-188 & DEVOPS-1687
+  if ( $::is_virtual ) {
+      ensure_packages( $remove_packages, {'ensure' => 'absent'} )
+  } else {
+      ensure_packages( delete($remove_packages, 'xorg-x11-drv-ati-firmware'), {'ensure' => 'absent'} )
+  }
+
   # uninstalled by default parameter 'absent' in init.pp
   ensure_packages( 'tftp-server', {'ensure' => $tftp_server_package_status} )
   ensure_packages( 'xinetd', {'ensure' => $xinetd_package_status} )
