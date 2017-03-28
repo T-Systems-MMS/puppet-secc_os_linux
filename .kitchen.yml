@@ -8,22 +8,42 @@ driver:
 provisioner:
   name: puppet_apply
   manifests_path: test
-  modules_path: puppet/modules
-  hiera_data_path: puppet/hieradata
+#  modules_path: puppet/modules
+#  hiera_data_path: puppet/hieradata
   require_chef_for_busser: false
   http_proxy: http://proxy.mms-dresden.de:8080
   https_proxy: http://proxy.mms-dresden.de:8080
   # certificate 
   # librarian_puppet_ssl_file: 'C:/Users/rkno/Documents/GitHub/secc_os_linux/cacert.pem'
   librarian_puppet_ssl_file: 'C:/tools/geppetto/R.Knochenhauer@t-systems.com/secc_os_linux/cacert.pem'
+  puppet_apply_command: |
+    sudo -E env http_proxy=http://proxy.mms-dresden.de:8080 https_proxy=http://proxy.mms-dresden.de:8080 /opt/puppetlabs/bin/puppet apply /tmp/kitchen/manifests/site.pp --modulepath=/tmp/kitchen/modules --fileserverconfig=/tmp/kitchen/fileserver.conf
 
+
+# Base image has compression disabled, so we need to disable too
+transport:
+  name: ssh
+  keepalive: true
+  keepalive_interval: 5
+  compression: none
+  compression_level: 9
+  
 platforms:
+#- name: centos7
+#  driver_plugin: vagrant
+#  driver:
+#    box: TMPLCentOS7_vbox
+#    box_check_update: true
+#    box_url: https://doimage.mms-at-work.de/TMPLCentOS7/releases/vagrant/TMPLCentOS7_0.3.182016080406_vbox.box
+#    provision: true
+#    vagrantfile_erb: Vagrantfile.erb
+#    username: vagrant
 - name: centos7
   driver_plugin: vagrant
   driver:
     box: centos7
     box_check_update: true
-    box_url: https://doimage.mms-at-work.de/TMPLCentOS7/releases/vagrant/TMPLCentOS7_0.3.182016080406_vbox.box
+    box_url: file:///H:/vagrantboxes/packer-centos7-virtualbox-iso.box
     provision: true
     vagrantfile_erb: Vagrantfile.erb
 
