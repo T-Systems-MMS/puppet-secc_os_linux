@@ -1,8 +1,4 @@
-﻿# AMCS SecC - Linux OS Hardening Modul
-
-####Table of Contents
-
-1. [Overview](#overview)
+﻿1. [Overview](#overview)
 2. [Fragen und Anmerkungen](#fragen)
 3. [Module Description - What the module does and why it is useful](#module-description)
 4. [Usage - Configuration options and additional functionality](#usage)
@@ -10,26 +6,26 @@
 6. [Limitations - OS compatibility, etc.](#limitations)
 7. [Development - Guide for contributing to the module](#development)
 
-##Overview
+# Overview
 Dieses Modul bietet eine Abdeckung der SoC Anforderungen für Linux
 
-##Fragen und Anmerkungen
+# Fragen und Anmerkungen
 [Fragen, Anmerkungen koennen über Jira gestellt werden.](https://projectcenter.t-systems-mms.eu/jira/secure/CreateIssueDetails!init.jspa?pid=15993&summary=secc_os_linux%20changeme&assignee=rkno&issuetype=13&priority=5&description=Beschreibung&components=21137)
 
-##Module Description
+# Module Description
 Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status via chkconfig bzw. deren Existenz (z.B. telnet), /etc/login.defs, /etc/pam.d/system-auth, /etc/pam.d/system-auth und  als auch XXXX.
 
-###Requirement - Abdeckung
+## Requirement - Abdeckung
 - SoC Requirements 3.01-1, 3.01-3, 3.37-7 werden in packages.pp sowie services.pp erfüllt.
 - SoC Requirements 3.21-1, 3.21-3, 3.21-5, 3.37-6, 3.37-10, 3.37-11, 3.37-12 werden über kernel.pp (/etc/sysctl.conf) erfüllt.
 - SoC Requirement 3.21-4 wird teilweise im SSH Modul (ssh.conf) und teilweise hier erfüllt.
-- SoC Requirements 3.01-23, 3.01-24, 3.01-25 wird über password.pp und login_defs.pp, Passwort-Policies (/etc/login.defs und /etc/pam.d/*) und Profile erfüllt.
+- SoC Requirements 3.01-23, 3.01-24, 3.01-25 wird über password.pp und login_defs.pp, Passwort-Policies (/etc/login.defs und /etc/pam.d/\*) und Profile erfüllt.
 - SoC Requirement 3.21-10 wird in profile.pp erfüllt.
 
-###Abweichungen
+## Abweichungen
 - nicht abgedeckte SoC Requirements müssen geprüft und ggf. in diesem Modul ergänzt werden.
 
-### Teile
+## Teile
 - audit konfiguriert rudimentäres Protokollieren von Aktivitäten auf der Bash. Kann über die syslog-Konfiguration von local6 auch an andere Server gesandt werden.
 - inputrc konfiguriert Search-Verhalten der Bash (strg+r)
 - syslog konfiguriert das Loggen von:
@@ -44,28 +40,43 @@ Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status
 - syslog stellt ein standardisiertes von SSH Aktivitäten und Bash-Loggings her (/var/log/secure und /var/log/bash_history)
 - logrotate rotiert bash_history
 
-##Usage
+# Usage
 - Das Modul sollte 1-zu-1 in die Projekt-Repositories übernommen werden können, aber der Rollout sollte kontrolliert über die einzelnen Umgebungen Richtung Live erfolgen.
-- Wichtig ist die Anpassung der Partitionsparameter (secure_mountpoint_*), da sonst das Modul fehlschlagen kann.
 - um die Funktion von logrotate sicherzustellen, muss das Package wenn es nicht schon installiert ist manuell installiert werden
+- Die Konfiguration der mounts kann deaktiviert werden:
+  - Beispiel:
+  ```
+  secc_os_linux::ext_secure_mountpoint_tmp: false
+  secc_os_linux::ext_secure_mountpoint_var: false
+  secc_os_linux::ext_secure_mountpoint_var_tmp: false
+  secc_os_linux::ext_secure_mountpoint_home: false
+  ```
+- Weiterhin können die mount-Parameter der einzelnen Partitionen separat angepasst werden:
+  - Beispiel:
+  ```
+  secc_os_linux::ext_mount_options_tmp: 'defaults,noexec,nodev,nosuid'
+  secc_os_linux::ext_mount_options_var: 'defaults,noexec,nodev,nosuid'
+  secc_os_linux::ext_mount_options_home: 'defaults,nodev'
+  secc_os_linux::ext_mount_options_var_tmp: 'bind'
+  ```
 
-###Usage ohne Puppet
+## Usage ohne Puppet
 - Eine Copy&Paste Übernahme in Projekte ist nicht möglich, aber die notwendigen Parameter sind anhand der Manifeste und Templates auslesbar.
 
-###Verifikation
+## Verifikation
 - Die Verifikation des sicheren Moduls kann über Serverspec (s. Serverspec im Repo) getestet werden.
 
-##Reference
+# Reference
 - OS(Unix)-Anforderungen stammen aus PSA 07 2015.
 
-##Limitations
+# Limitations
 - Modul wurde erfolgreich gegen CentOS6, RHEL6, RHEL7, SLES11 und SLES12 getestet.
-- Bash-Auditting funktioniert nicht bei SLES 11, da "history" in PROMPT_COMMAND leer ist.
+- Bash-Auditing funktioniert nicht bei SLES 11, da "history" in PROMPT_COMMAND leer ist.
 
-##Development
+# Development
 - Änderungen am Modul sollten auch im Serverspec Script secc_os_linux_spec.rb nachgezogen werden.
 
-##Release Notes/Contributors/Etc **Optional**
+# Release Notes
 - Initialrelease.
 - 1.0.1 fix of rootsh integration in /etc/profile to allow non interactive shells to work (like scp)
 - 1.0.2 added arpwatch to detect arp-spoofing attack (alerting not included)
@@ -74,6 +85,4 @@ Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status
 - 1.2.0 added CIS compliant mount point configurations and disabled firewall and usb storage kernel modules
 - 1.3.0 removed the not needed SLES stuff, moved rsyslog config to own file under /etc/rsyslog.d/, removed non needed files from module
 - 1.3.26 added parameter to disable rsyslog service management
-- next: iptables integration (maybe own module) or augeas instead of file_line
-- changes can be found in Git
-
+- 1.4.0 make mountpoints configurable

@@ -1,6 +1,6 @@
 # disable potential critical kernel modules
 class secc_os_linux::modules(
-  $disable_kernel_modules,  
+  $disable_kernel_modules,
 ) {
 
   file { '/etc/modprobe.d/secc-blacklist.conf':

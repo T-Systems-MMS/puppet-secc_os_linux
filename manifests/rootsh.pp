@@ -12,7 +12,7 @@ class secc_os_linux::rootsh (
         package { 'rootsh':
           ensure => 'present',
         }
-      } 
+      }
       else {
         package { 'rootsh':
           ensure => 'absent',
