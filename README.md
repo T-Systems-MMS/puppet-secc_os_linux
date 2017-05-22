@@ -85,4 +85,4 @@ Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status
 - 1.2.0 added CIS compliant mount point configurations and disabled firewall and usb storage kernel modules
 - 1.3.0 removed the not needed SLES stuff, moved rsyslog config to own file under /etc/rsyslog.d/, removed non needed files from module
 - 1.3.26 added parameter to disable rsyslog service management
-- 1.4.0 make mountpoints configurable
+- 1.5.0 make mountpoints configurable, add teamcity tests
