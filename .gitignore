@@ -2,6 +2,10 @@
 .kitchen/
 .tmp/
 .librarian/
-Puppetfile.lock
 /.idea/
-/tools/
+/log/
+/.vagrant/
+/junit/
+*.iml
+Puppetfile.lock
+Gemfile.lock
