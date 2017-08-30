@@ -68,7 +68,7 @@ class secc_os_linux::audit {
     ensure => present,
     path   => '/etc/bashrc',
     line   => 'typeset -r HISTFILE',
-    match  => 'typeset -r HISTFILE',
+    match  => 'typeset -r HISTFILE$',
   } ->
 
   file_line { '/etc/bashrc_secc_histfilesize':
