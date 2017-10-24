@@ -401,7 +401,8 @@ class secc_os_linux::kernel (
   # possible problems: https://access.redhat.com/solutions/2798411
   # JIRA Issue: https://jira.t-systems-mms.eu/browse/ASC-234
   exec { 'rebuild_initramfs':
-    command => 'dracut -f',
+    command     => 'dracut -f',
+    path        => '/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin',
     refreshonly => true,
   }
 
