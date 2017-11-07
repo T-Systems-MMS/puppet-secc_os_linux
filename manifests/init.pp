@@ -23,7 +23,7 @@ class secc_os_linux (
   $ext_arp_restricted                   = true,
   $ext_enable_stack_protection          = true,
   $ext_rsyslog_manage_service           = true,
-  $ext_disable_kernel_modules           = [ 'usb-storage', 'firewire-core', 'firewire-ohci', 'cramfs', 'freevxfs', 'jffs2', 'hfs', 'hfsplus', 'squashfs', 'udf' ],
+  $ext_disable_kernel_modules           = [ 'usb-storage', 'firewire-core', 'firewire-ohci', 'cramfs', 'freevxfs', 'jffs2', 'hfs', 'hfsplus', 'squashfs', 'udf', 'isdn' ],
   $ext_mount_options_tmp                = 'defaults,noexec,nodev,nosuid',
   $ext_mount_options_var                = 'defaults,noexec,nodev,nosuid',
   $ext_mount_options_var_tmp            = 'bind',
