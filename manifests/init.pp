@@ -32,6 +32,7 @@ class secc_os_linux (
   $ext_secure_mountpoint_var            = true,
   $ext_secure_mountpoint_var_tmp        = true,
   $ext_secure_mountpoint_home           = true,
+  $ext_profile_umask                    = '027',
 ){
 
   $tftp_server_package_status       = hiera("${module_name}::tftp_server_package_status", $ext_tftp_server_package_status)
@@ -60,8 +61,7 @@ class secc_os_linux (
   $secure_mountpoint_var            = hiera("${module_name}::secure_mountpoint_var", $ext_secure_mountpoint_var)
   $secure_mountpoint_var_tmp        = hiera("${module_name}::secure_mountpoint_var_tmp", $ext_secure_mountpoint_var_tmp)
   $secure_mountpoint_home           = hiera("${module_name}::secure_mountpoint_var", $ext_secure_mountpoint_home)
-
-
+  $profile_umask                    = hiera("${module_name}::profile_umask", $ext_profile_umask)
 
   include secc_os_linux::audit
 
@@ -94,7 +94,9 @@ class secc_os_linux (
     remove_packages            => $remove_packages,
   }
 
-  include secc_os_linux::profile
+  class { 'secc_os_linux::profile':
+    profile_umask => $profile_umask,
+  }
 
   class { 'secc_os_linux::rootsh':
     rootsh_enabled => $rootsh_enabled,
