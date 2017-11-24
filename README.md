@@ -34,7 +34,7 @@ Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status
 - kernel setzt vor Allem netzwerkrelevante Settings in der /etc/sysctl.conf um.
 - login_defs kontrolliert default umask, encryption modes und password min age.
 - password stellt Passwortrichtlinien bereit (mind. 1 Sonderzeichen, Groß- wie Kleinbuchstaben und eine Zahl, sowie eine Mindestanzahl von 10 Zeichen)
-- profile kontrolliert default umask, kann aber parametrisiert werden !! mit dem parametrisieren der umask werden die SOC Requirements  umgangen !!
+- profile kontrolliert default umask, kann aber parametrisiert werden <span style="color:red">!! mit dem parametrisieren der umask werden die SOC Requirements  umgangen </span>
 - rootsh stellt saubere Loggingmoeglichkeiten auf ssh Ebene zur Verfügung (ausschliesslich Redhat Derivate; leichte Dopplung zu audit )
 - services steuert die Existenz und den Status von Diensten
 - syslog stellt ein standardisiertes von SSH Aktivitäten und Bash-Loggings her (/var/log/secure und /var/log/bash_history)
