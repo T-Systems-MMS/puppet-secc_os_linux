@@ -514,7 +514,8 @@ describe 'Class secc_os_linux' do
   describe file('/var') do
     it { should be_mounted }
     it { should be_mounted.with( :options => { :nodev => true } ) }
-    it { should be_mounted.with( :options => { :noexec => true } ) }
+    # will be disabled because it's creating a lot of trouble and troubleshooting efforts - ASC-183
+    # it { should be_mounted.with( :options => { :noexec => true } ) }
     it { should be_mounted.with( :options => { :nosuid => true } ) }
   end
 
