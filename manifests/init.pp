@@ -33,6 +33,7 @@ class secc_os_linux (
   $ext_secure_mountpoint_var_tmp        = true,
   $ext_secure_mountpoint_home           = true,
   $ext_profile_umask                    = '027',
+  $ext_manage_passwords                 = true,
 ){
 
   $tftp_server_package_status       = hiera("${module_name}::tftp_server_package_status", $ext_tftp_server_package_status)
@@ -62,6 +63,7 @@ class secc_os_linux (
   $secure_mountpoint_var_tmp        = hiera("${module_name}::secure_mountpoint_var_tmp", $ext_secure_mountpoint_var_tmp)
   $secure_mountpoint_home           = hiera("${module_name}::secure_mountpoint_var", $ext_secure_mountpoint_home)
   $profile_umask                    = hiera("${module_name}::profile_umask", $ext_profile_umask)
+  $manage_passwords                 = hiera("${module_name}::manage_passwords", $ext_manage_passwords)
 
   include secc_os_linux::audit
 
@@ -86,7 +88,7 @@ class secc_os_linux (
 
   contain secc_os_linux::mounts
 
-  include secc_os_linux::password
+  contain secc_os_linux::password
 
   class { 'secc_os_linux::packages':
     tftp_server_package_status => $tftp_server_package_status,
