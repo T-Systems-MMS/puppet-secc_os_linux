@@ -25,7 +25,7 @@ class secc_os_linux (
   $ext_rsyslog_manage_service           = true,
   $ext_disable_kernel_modules           = [ 'usb-storage', 'firewire-core', 'firewire-ohci', 'cramfs', 'freevxfs', 'jffs2', 'hfs', 'hfsplus', 'squashfs', 'udf', 'isdn' ],
   $ext_mount_options_tmp                = 'defaults,noexec,nodev,nosuid',
-  $ext_mount_options_var                = 'defaults,noexec,nodev,nosuid',
+  $ext_mount_options_var                = 'defaults,nodev,nosuid',
   $ext_mount_options_var_tmp            = 'bind',
   $ext_mount_options_home               = 'defaults,nodev',
   $ext_secure_mountpoint_tmp            = true,
