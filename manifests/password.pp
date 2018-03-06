@@ -7,7 +7,7 @@ class secc_os_linux::password {
   # SoC - Requirement 3.01-25 - Falls Passwoerter als Authentisierungsmerkmal genutzt werden, muss ein Schutz gegen Woerterbuch- und Brute-Force-Angriffe vorhanden sein,
   #       der das Erraten von Passwoertern stark erschwert.
 
-		if ($::secc_os_linux::manage_passwords) {
+    if ($::secc_os_linux::manage_passwords) {
 
       if ( $::operatingsystem == 'RedHat' ) or ( $::operatingsystem == 'CentOS' ) {
         if ( $::operatingsystemmajrelease == '6' ) {
