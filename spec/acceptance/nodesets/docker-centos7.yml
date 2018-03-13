@@ -3,14 +3,9 @@ HOSTS:
     roles:
       - agent
     platform: el-7-x86_64
-    image: centos:7
-    hypervisor: docker
-    docker_cmd: '["/sbin/init"]'
-    docker_preserve_image: true
-    docker_image_commands:
-      - 'yum localinstall -y https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm'
-      - 'yum install -y epel-release'
-      - 'yum install -y puppet'
-      - 'puppet module install puppetlabs-stdlib'
+    hypervisor: vagrant
+    box: puppetlabs/centos-7.2-64-puppet-enterprise
+    box_url: https://vagrantcloud.com/puppetlabs/boxes/centos-7.2-64-puppet-enterprise
 CONFIG:
   type: foss
+  trace_limit: 10000

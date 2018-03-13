@@ -16,6 +16,10 @@ RSpec.configure do |c|
       install_puppet_on(host)
 
       install_dev_puppet_module_on(host, :source => module_root, :module_name => 'secc_os_linux')
+
+      # clean sysctl
+      on(host, "sed -i '/net.bridge.bridge-nf-call-/d' /etc/sysctl.conf")
+
       # Install dependencies
       on(host, puppet('module', 'install', 'puppetlabs-stdlib'))
       # Add more setup code as needed

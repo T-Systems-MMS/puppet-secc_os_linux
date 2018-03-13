@@ -8,7 +8,7 @@ class secc_os_linux (
   $ext_test_kitchen_run                 = false,
   $ext_rootsh_enabled                   = true,
   $ext_bash_ps1                         = 'PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\\u\[$(tput setaf 4)\]@\[$(tput setaf 2)\]\\h\[$(tput setaf 4)\]:\[$(tput setaf 7)\]\\w\[$(tput setaf 4)\]\\$ \[$(tput sgr0)\]"',
-  $ext_stop_and_disable_services        = [ 'acpid', 'anacron', 'cups', 'dhcpd', 'network-remotefs', 'haldaemon', 'lm_sensors', 'mdmonitor', 'netconsole', 'netfs', 'nfs', 'ntpdate', 'oddjobd', 'portmap', 'portreserve', 'qpidd', 'quota_nld', 'rdisc', 'rhnsd', 'rhsmcertd', 'saslauthd', 'sendmail', 'smartd', 'sysstat', 'vsftpd', 'wpa_supplicant' ],
+  $ext_stop_and_disable_services        = [ 'abrtd', 'acpid', 'anacron', 'cups', 'dhcpd', 'network-remotefs', 'haldaemon', 'lm_sensors', 'mdmonitor', 'netconsole', 'netfs', 'nfs', 'ntpdate', 'oddjobd', 'portmap', 'portreserve', 'qpidd', 'quota_nld', 'rdisc', 'rhnsd', 'rhsmcertd', 'saslauthd', 'sendmail', 'smartd', 'sysstat', 'vsftpd', 'wpa_supplicant' ],
   $ext_stop_services                    = [ 'nfslock', 'rpcgssd', 'rpcidmapd', 'rpcsvcgssd' ],
   $ext_rsyslog_setting_var_log_messages = '*.info;mail.none;authpriv.none;cron.none;local5.none;local6.none',
   $ext_logrotate_enabled                = true,

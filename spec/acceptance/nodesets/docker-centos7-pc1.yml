@@ -3,9 +3,9 @@ HOSTS:
     roles:
       - agent
     platform: el-7-x86_64
-    image: docker.internal.mms-support.de/centos:7proxy
-    hypervisor: docker
-    docker_cmd: '["/sbin/init"]'
-    docker_preserve_image: true
+    hypervisor: vagrant
+    box: puppetlabs/centos-7.2-64-puppet
+    box_url: https://vagrantcloud.com/puppetlabs/boxes/centos-7.2-64-puppet
 CONFIG:
   type: aio
+  trace_limit: 10000

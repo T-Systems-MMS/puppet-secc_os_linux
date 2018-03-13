@@ -3,9 +3,9 @@ HOSTS:
     roles:
       - agent
     platform: el-6-x86_64
-    image: centos:6
-    hypervisor: docker
-    docker_cmd: '["/sbin/init"]'
-    docker_preserve_image: true
+    hypervisor: vagrant
+    box: puppetlabs/centos-6.6-64-puppet
+    box_url: https://vagrantcloud.com/puppetlabs/boxes/centos-6.6-64-puppet
 CONFIG:
   type: aio
+  trace_limit: 10000
