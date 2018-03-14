@@ -17,7 +17,7 @@ RSpec.configure do |c|
 
       install_dev_puppet_module_on(host, :source => module_root, :module_name => 'secc_os_linux')
 
-      # clean sysctl
+      # remoce false sysctl entries from centos6 test image
       on(host, "sed -i '/net.bridge.bridge-nf-call-/d' /etc/sysctl.conf")
 
       # Install dependencies
