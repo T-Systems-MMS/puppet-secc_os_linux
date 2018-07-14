@@ -1,13 +1,27 @@
 {
-  "author": "rkno",
-  "dependencies": [ {"name":"puppetlabs/stdlib"} ],
-  "license": "",
-  "name": "secc_os_linux",
-  "operatingsystem_support": [ "RHEL6", "RHEL7", "CentOS6", "CentOS7" ],
-  "project_page": "",
-  "requirements": [],
-  "source": "",
-  "summary": "",
-  "tags": [],
-  "version": "1.8.0"
+  "name": "tsystemsmms-secc_os_linux",
+  "version": "1.8.0",
+  "author": "T-Systems Multimedia Solutions GmbH",
+  "summary": "Dieses Modul bietet eine teilweise Abdeckung der SoC Anforderungen für OS unter Linux.",
+  "license": "Apache-2.0",
+  "project_page": "https://github.com/T-Systems-MMS/puppet-secc_os_linux",
+  "source": "https://github.com/T-Systems-MMS/puppet-secc_os_linux",
+  "issues": "https://github.com/T-Systems-MMS/puppet-secc_os_linux/issues",
+  "dependencies": [
+    { "name": "puppetlabs/stdlib", "version_requirement": ">= 3.2.0 < 5.0.0" }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [ "6", "7" ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [ "6", "7" ]
+    }
+  ],
+  "requirements": [
+    { "name": "puppet", "version_requirement": ">= 3.0.0 < 5.0.0" }
+  ],
+  "tags": [ "os", "linux", "security" ]
 }

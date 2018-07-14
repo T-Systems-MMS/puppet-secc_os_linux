@@ -1,18 +1,19 @@
-﻿1. [Overview](#overview)
-2. [Fragen und Anmerkungen](#fragen)
+﻿# SecC OS Linux Module
+
+[![Build Status](https://travis-ci.org/T-Systems-MMS/puppet-secc_os_linux.svg?branch=master)](https://travis-ci.org/T-Systems-MMS/puppet-secc_os_linux)
+
+## Table of Contents
+1. [Overview](#overview)
 3. [Module Description - What the module does and why it is useful](#module-description)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 6. [Limitations - OS compatibility, etc.](#limitations)
 7. [Development - Guide for contributing to the module](#development)
 
-# Overview
+## Overview
 Dieses Modul bietet eine Abdeckung der SoC Anforderungen für Linux
 
-# Fragen und Anmerkungen
-[Fragen, Anmerkungen koennen über Jira gestellt werden.](https://projectcenter.t-systems-mms.eu/jira/secure/CreateIssueDetails!init.jspa?pid=15993&summary=secc_os_linux%20changeme&assignee=rkno&issuetype=13&priority=5&description=Beschreibung&components=21137)
-
-# Module Description
+## Module Description
 Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status via chkconfig bzw. deren Existenz (z.B. telnet), /etc/login.defs, /etc/pam.d/system-auth, /etc/pam.d/system-auth und  als auch XXXX.
 
 ## Requirement - Abdeckung
@@ -67,22 +68,8 @@ Das Modul kontrolliert sowohl Kernelsettings in /etc/sysctl.conf, Dienste Status
 - Die Verifikation des sicheren Moduls kann über Serverspec (s. Serverspec im Repo) getestet werden.
 
 # Reference
-- OS(Unix)-Anforderungen stammen aus PSA 07 2015.
+- Anforderungen stammen aus den technischen Sicherheitsanforderungen (https://www.telekom.com/psa) des PSA Verfahrens
 
 # Limitations
 - Modul wurde erfolgreich gegen CentOS6, RHEL6, RHEL7, SLES11 und SLES12 getestet.
 - Bash-Auditing funktioniert nicht bei SLES 11, da "history" in PROMPT_COMMAND leer ist.
-
-# Development
-- Änderungen am Modul sollten auch im Serverspec Script secc_os_linux_spec.rb nachgezogen werden.
-
-# Release Notes
-- Initialrelease.
-- 1.0.1 fix of rootsh integration in /etc/profile to allow non interactive shells to work (like scp)
-- 1.0.2 added arpwatch to detect arp-spoofing attack (alerting not included)
-- 1.0.3 fixed alsa-firmware conflict, which occured only once at the first run
-- 1.1.0 added test kitchen integration (with ruby 2.2.4) and parameters for xinetd and tftp-servers
-- 1.2.0 added CIS compliant mount point configurations and disabled firewall and usb storage kernel modules
-- 1.3.0 removed the not needed SLES stuff, moved rsyslog config to own file under /etc/rsyslog.d/, removed non needed files from module
-- 1.3.26 added parameter to disable rsyslog service management
-- 1.5.0 make mountpoints configurable, add teamcity tests

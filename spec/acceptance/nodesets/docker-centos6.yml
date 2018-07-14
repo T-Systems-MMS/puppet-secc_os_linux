@@ -3,7 +3,7 @@ HOSTS:
     roles:
       - agent
     platform: el-6-x86_64
-    image: docker.internal.mms-support.de/centos:6proxy
+    image: centos:6
     hypervisor: docker
     docker_cmd: '["/sbin/init"]'
     docker_preserve_image: true
@@ -14,4 +14,3 @@ HOSTS:
       - 'puppet module install puppetlabs-stdlib'
 CONFIG:
   type: foss
-  package_proxy: http://proxy.mms-dresden.de:8080
