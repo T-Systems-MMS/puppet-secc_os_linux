@@ -1,10 +1,11 @@
 ---
 language: ruby
 sudo: required
-services:
-  - docker
 bundler_args: --without system_tests
 script:
+  - sudo apt-get update -q
+  - sudo apt-get install -q virtualbox --fix-missing
+  - sudo apt-get install -q vagrant --fix-missing
   - gem install bundler
   - bundle install --path vendor/bundle
   - bundle exec rake
@@ -27,4 +28,3 @@ deploy:
     tags: true
     all_branches: true
     condition: "$DEPLOY_TO_FORGE = yes"
-

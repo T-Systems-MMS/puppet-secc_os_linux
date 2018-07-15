@@ -17,4 +17,5 @@ group :acceptance do
   gem 'puppetlabs_spec_helper'
   gem 'puppet-lint', '1.1.0'
   gem 'puppet-syntax'
+  gem 'vagrant'
 end
