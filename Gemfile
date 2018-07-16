@@ -8,7 +8,7 @@ group :acceptance do
   gem 'jruby-pageant'
   gem 'ffaker'
   gem 'highline'
-  gem 'rake'
+  gem 'rake', '~> 10.1.0'
   if puppetversion = ENV['PUPPET_VERSION']
     gem 'puppet', puppetversion
   else
@@ -17,5 +17,4 @@ group :acceptance do
   gem 'puppetlabs_spec_helper'
   gem 'puppet-lint', '1.1.0'
   gem 'puppet-syntax'
-  gem 'vagrant'
 end

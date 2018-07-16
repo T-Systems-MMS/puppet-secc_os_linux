@@ -5,7 +5,11 @@ bundler_args: --without system_tests
 script:
   - sudo apt-get update -q
   - sudo apt-get install -q virtualbox --fix-missing
-  - sudo apt-get install -q vagrant --fix-missing
+  - sudo apt-get install linux-headers-`uname -r`
+  - sudo dpkg-reconfigure virtualbox-dkms
+  #- sudo apt-get install -q vagrant --fix-missing
+  - wget https://releases.hashicorp.com/vagrant/2.1.2/vagrant_2.1.2_x86_64.deb
+  - sudo dpkg -i vagrant_2.1.2_x86_64.deb
   - gem install bundler
   - bundle install --path vendor/bundle
   - bundle exec rake

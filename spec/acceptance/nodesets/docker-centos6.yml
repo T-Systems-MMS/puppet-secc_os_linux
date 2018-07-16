@@ -4,8 +4,8 @@ HOSTS:
       - agent
     platform: el-6-x86_64
     hypervisor: vagrant
-    box: puppetlabs/centos-6.6-64-puppet-enterprise
-    box_url: https://vagrantcloud.com/puppetlabs/boxes/centos-6.6-64-puppet-enterprise
+    box: puppetlabs/centos-6.6-32-puppet-enterprise
+    box_url: https://vagrantcloud.com/puppetlabs/boxes/centos-6.6-32-puppet-enterprise
 CONFIG:
   type: foss
   trace_limit: 10000
