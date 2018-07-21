@@ -7,6 +7,7 @@ bundler_args: --without system_tests
 script:
   - gem install bundler
   - bundle install --path vendor/bundle
+  - sed -i -e 's/sysctl -p/sysctl -e -p/' manifests/kernel.pp # fix sysctl errors for build
   - bundle exec rake
 matrix:
   include:

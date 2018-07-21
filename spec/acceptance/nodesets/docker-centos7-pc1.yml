@@ -7,6 +7,10 @@ HOSTS:
     image: centos:7
     docker_cmd: '["/sbin/init"]'
     docker_preserve_image: true
+    docker_image_commands:
+      - 'yum install -y dracut procps authconfig'
+      - 'authconfig --updateall'
+      - 'mkdir /boot'
 CONFIG:
   type: aio
   trace_limit: 10000

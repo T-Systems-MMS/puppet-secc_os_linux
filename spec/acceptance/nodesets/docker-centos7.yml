@@ -10,6 +10,9 @@ HOSTS:
     docker_image_commands:
       - 'yum localinstall -y https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm'
       - 'yum install -y puppet'
+      - 'yum install -y dracut procps authconfig'
+      - 'authconfig --updateall'
+      - 'mkdir /boot'
       - 'puppet module install puppetlabs-stdlib'
 CONFIG:
   type: foss

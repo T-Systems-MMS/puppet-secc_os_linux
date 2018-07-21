@@ -8,12 +8,21 @@ class secc_os_linux::syslog (
 ){
 
   if ( $::operatingsystem == 'RedHat' and $::operatingsystemmajrelease >= '6') or ( $::operatingsystem == 'CentOS' and $::operatingsystemmajrelease >= '6') {
-    file { '/etc/rsyslog.d/secc-audit.conf':
-      ensure => present,
+    file { '/etc/rsyslog.d':
+      ensure => 'directory',
       owner  => 'root',
       group  => 'root',
-      mode   => '0644',
-      source => 'puppet:///modules/secc_os_linux/etc/rsyslog.d/secc-audit.conf',
+      mode   => '0755',
+    }
+
+    # TODO: refactor for depencency to package rsyslog
+    file { '/etc/rsyslog.d/secc-audit.conf':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      source  => 'puppet:///modules/secc_os_linux/etc/rsyslog.d/secc-audit.conf',
+      require => File['/etc/rsyslog.d'],
     }
 
     if $rsyslog_manage_service {
