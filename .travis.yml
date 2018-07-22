@@ -1,9 +1,8 @@
----
 language: ruby
 sudo: required
 services:
-  - docker
-bundler_args: --without system_tests
+- docker
+bundler_args: "--without system_tests"
 script:
   - gem install bundler
   - bundle install --path vendor/bundle
@@ -24,7 +23,7 @@ deploy:
   provider: puppetforge
   user: tsystemsmms
   password:
-    secure: kDb/MphFpzAsYezAQm1pn4m1DoiedeVpLg5FW8lHvyMut/kQQEC+u+8aktD0aaNtRxFqYVNNzV9APRR0a08oHmFXEdS3p+5qwxYxdHPeJue8YP0d7pUQCUZS31zCeltefRhoNy/4jMhxHGLgcSGQ738smKwJOrE+iWBM1BfQ2fMAMzOwfHSBScv/h0XsHA3n4NUTXKY3bSklA5JuzKlTfx9VkKx/R/OQsJssbyLAULEfoAQfZs7hUFeKShXm7d8SJ7ylvjmY/Cn/64vZmyAKe8pats7gK0RHsst3W0j5Ek+ekDF94xRrATGKbTpvmc+d/XV7bz/rouEegIYJ6HmOT9e8C+ZBok/dD7GU/cppnlNWmtv3zb3I4hH07mRA39tkSUke47zV/OtKqHMFwfXM+j3dVnPdJ+aHFfrzXRhsLTmmGh2LldiuLtQnWkLtMCjd/KO6WY+QX8fH/js/4I8buzcYioxC6GT8QA+TKMSav7z3O+HnvQ/1kh6AB1U6xr1u28CIt2O/s6Oyunp3OLyQNF/sXAseCAB5ENHpDEDJu5emM8vdoFZIJbks2DkqfqWbB6jeLPhcgdgaBhcigH1iBE4iaV1DU3P+eIwg8yAM0Mjahxk+JQgKQ6Qo+YQywdgzmbmi9A2HFHVix+AY6E2pw2EMLuyBQaGyt+QJTS89aWY=
+    secure: ZeD67Wgiq7d6U9PFWAfaDzE++2wp74RfJScXrZemzGSL2EdlRakEan/gwrg7hyYOGqNmnRDm2x5jMYx4uJrDcN4GNaoVowUF0Yw95owphZQ7F5VT+IIwAxWOg9ro4hHBgbAXDSNCaDqXezb8WGnKFOcLFSi+dJ5HXHQQ/mFaZpuRKtr/CWeqviK8C7VI3iiTfzf8uawmNbKjwTdhzlTlc8v2VcW+4XGCr6uq5gQbBHbgwYJnO0WwtNAa4GgVU7NpT62qgatpZO1ZYgiJly8C0Wgd29hH+/8RXmdAKgjtrHtftwB3oQ8Te6Gaxv/y/pOxBGtw9A307MXQ0ThBcywSWv7Pkk+CqZgNTJRM2kiIb6JcjDtzsG6zKDsNkGxgHySLJ58m1t+l3smyZTvtfrTBKh8Z3tzx2h1bBLtFPxg5Qy+0iS2gX0jwmRF91G24ytbQJ5Wic9NoVuk4YLzX7f/SR5Dk0/eKnDz5WDrPHl6TYl438wYY4D5Oxn90GiQZXED3tXgalB0zoxuYyNJUrbUXHMm/dyQSr/u24XOWqQQaLldPgaUXVnKrBpEKojQIdBYGY117MVqCAt4fG9pVayGuBOHhvWZiqwOwevHfZLnO7ow6jt7cEWT5oN7sYw8V/wJh00gFI+gaaGCzfCxp1QdhlZGb7vrfreLJruWF2NuGZT0=
   on:
     tags: true
     all_branches: true
