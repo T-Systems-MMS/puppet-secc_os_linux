@@ -9,6 +9,7 @@ script:
   - bundle install --path vendor/bundle
   - sed -i -e 's/sysctl -p/sysctl -e -p/' manifests/kernel.pp # fix sysctl errors for build
   - bundle exec rake
+  - sed -i -e 's/sysctl -e -p/sysctl -p/' manifests/kernel.pp # revert fix for deployment
 matrix:
   include:
   - rvm: 2.1.8
