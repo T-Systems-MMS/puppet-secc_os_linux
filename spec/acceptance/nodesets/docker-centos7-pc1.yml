@@ -1,11 +1,16 @@
 HOSTS:
-  centos-72-x64-ag1:
+  centos-7-pc1:
     roles:
       - agent
     platform: el-7-x86_64
-    image: docker.internal.mms-support.de/centos:7proxy
     hypervisor: docker
+    image: centos:7
     docker_cmd: '["/sbin/init"]'
     docker_preserve_image: true
+    docker_image_commands:
+      - 'yum install -y dracut procps authconfig'
+      - 'authconfig --updateall'
+      - 'mkdir /boot'
 CONFIG:
   type: aio
+  trace_limit: 10000

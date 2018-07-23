@@ -1,6 +1,11 @@
 # CHANGELOG
 ## [UNRELEASED]
 
+## [1.9.0] - 2018-07-23
+* remove obsolete files
+* add `abrtd` to disabled services
+* add rsyslog.d to managed directories
+
 ## [1.8.0] - 2018-07-15
 * initial public release
 
