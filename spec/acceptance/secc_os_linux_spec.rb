@@ -334,6 +334,9 @@ describe 'Class secc_os_linux' do
     its(:stdout) { should match /^0027$/ }
   end
   describe file('/etc/profile.d/umask.sh') do
+    it { should be_mode 644 }
+    it { should be_owned_by 'root' }
+    it { should be_grouped_into 'root' }
     its(:content) { should match /umask 027/ }
   end
 

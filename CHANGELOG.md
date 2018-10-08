@@ -1,5 +1,6 @@
 # CHANGELOG
 ## [UNRELEASED]
+* extended tests for /etc/profile.d/umask.sh
 
 ## [1.9.0] - 2018-07-23
 * remove obsolete files
