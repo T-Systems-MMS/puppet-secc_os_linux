@@ -32,15 +32,15 @@ Further it manages files relevant for user authentication, including `/etc/login
   * logging can be redirected via syslog to an external server (facility: local6)
 * `inputrc.pp` configures bash history search (ctrl+r)
 * `kernel.pp` manages `/etc/sysctl.conf` with mostly network relevant settings
-* `login_defs.pp` controlls default umask, encryption modes and password min age
+* `login_defs.pp` controls default umask, encryption modes and password min age
 * `logrotate.pp` adds rotation for bash_history
-* `modules.pp` blacklists some problemativ kernel modules
-* `mounts.pp` controlls mount points and sets sensible mount options
+* `modules.pp` blacklists some problematic kernel modules
+* `mounts.pp` controls mount points and sets sensible mount options
 * `packages.pp` uninstalls unneeded software
-* `password.pp` configures passwort policy (1 special character, upper and lower case letters, and at least one digit, minimum size of 10 chars)
-* `profile.pp` controlls default umask
+* `password.pp` configures password policy (1 special character, upper and lower case letters, and at least one digit, minimum size of 10 chars)
+* `profile.pp` controls default umask
   * can be parametrized, but this breaks SoC compliance
-* `rootsh.pp` providews logging of all root acitivites via `rootsh` (slight duplication to audit logging)
+* `rootsh.pp` provides logging of all root acitivites via `rootsh` (slight duplication to audit logging)
 * `services.pp` manages state of detault services
 * `syslog.pp`configures logging of:
   * authpriv /var/log/secure
