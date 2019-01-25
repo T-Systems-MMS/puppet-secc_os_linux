@@ -115,9 +115,9 @@ require 'spec_helper'
     end
 
     # req. 16 / 3_21 Unix
-    # kernel > 3.0 does not have this parameter
+    # rhel7 should not have this value
     context linux_kernel_parameter('kernel.exec-shield') do
-      its(:value) { should_not eq 0 }
+      its(:value) { should_not exist }
     end
     context linux_kernel_parameter('kernel.randomize_va_space') do
       its(:value) { should eq 2 }

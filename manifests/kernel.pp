@@ -380,7 +380,7 @@ class secc_os_linux::kernel (
     notify => [Exec['sysctl_load'], Exec['rebuild_initramfs']],
   }
 
-  if ( $::kernelmajversion < '3.0' ) {
+  if Integer.new($::operatingsystemmajrelease) < 7 {
     file_line { 'kernel_exec_shield' :
       ensure => present,
       path   => '/etc/sysctl.conf',
@@ -388,7 +388,6 @@ class secc_os_linux::kernel (
       match  => 'kernel.exec-shield.*',
       notify => [Exec['sysctl_load'], Exec['rebuild_initramfs']],
     }
-
   }
 
   exec { 'sysctl_load':
