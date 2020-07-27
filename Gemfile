@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 group :acceptance do
   gem 'nokogiri', '~> 1.10.4'
   gem 'net-ssh'
-  gem 'pry'
   gem 'beaker-rspec'
   gem 'beaker', '~> 3.7'
   gem 'jruby-pageant'
@@ -20,6 +19,4 @@ group :acceptance do
   gem 'puppet-syntax'
   # pin pry to avoid bug
   gem "pry", '< 0.13.0'
-  # pin bolt to avoid bug
-  gem "bolt", '< 2.0.0'
 end
