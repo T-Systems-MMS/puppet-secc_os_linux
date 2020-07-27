@@ -18,4 +18,8 @@ group :acceptance do
   gem 'puppetlabs_spec_helper'
   gem 'puppet-lint', '1.1.0'
   gem 'puppet-syntax'
+  # pin pry to avoid bug
+  gem "pry", '< 0.13.0'
+  # pin bolt to avoid bug
+  gem "bolt", '< 2.0.0'
 end
