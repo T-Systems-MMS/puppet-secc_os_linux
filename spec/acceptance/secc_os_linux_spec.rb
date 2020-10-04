@@ -6,11 +6,11 @@ describe 'Class secc_os_linux' do
     let(:manifest) {
     <<-EOS
       class { 'secc_os_linux':
-        ext_rootsh_enabled => false,
-        ext_secure_mountpoint_tmp => false,
-        ext_secure_mountpoint_var => false,
-        ext_secure_mountpoint_var_tmp => false,
-        ext_secure_mountpoint_home => false,
+        rootsh_enabled => false,
+        secure_mountpoint_tmp => false,
+        secure_mountpoint_var => false,
+        secure_mountpoint_var_tmp => false,
+        secure_mountpoint_home => false,
       }
     EOS
     }
