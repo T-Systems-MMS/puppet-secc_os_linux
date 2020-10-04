@@ -52,18 +52,18 @@ Further it manages files relevant for user authentication, including `/etc/login
 * Configuration of mount points can be deactivated
   * Example:
   ```
-  secc_os_linux::ext_secure_mountpoint_tmp: false
-  secc_os_linux::ext_secure_mountpoint_var: false
-  secc_os_linux::ext_secure_mountpoint_var_tmp: false
-  secc_os_linux::ext_secure_mountpoint_home: false
+  secc_os_linux::secure_mountpoint_tmp: false
+  secc_os_linux::secure_mountpoint_var: false
+  secc_os_linux::secure_mountpoint_var_tmp: false
+  secc_os_linux::secure_mountpoint_home: false
   ```
 * Parameters for mount points can be tuned on a per partition basis
   * Example:
   ```
-  secc_os_linux::ext_mount_options_tmp: 'defaults,noexec,nodev,nosuid'
-  secc_os_linux::ext_mount_options_var: 'defaults,noexec,nodev,nosuid'
-  secc_os_linux::ext_mount_options_home: 'defaults,nodev'
-  secc_os_linux::ext_mount_options_var_tmp: 'bind'
+  secc_os_linux::mount_options_tmp: 'defaults,noexec,nodev,nosuid'
+  secc_os_linux::mount_options_var: 'defaults,noexec,nodev,nosuid'
+  secc_os_linux::mount_options_home: 'defaults,nodev'
+  secc_os_linux::mount_options_var_tmp: 'bind'
   ```
 
 # Reference

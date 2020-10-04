@@ -23,7 +23,7 @@ class secc_os_linux::packages (
       }
   }
 
-  # uninstall unwanted packages, configured as default parameter to $ext_remove_packages in init.pp
+  # uninstall unwanted packages, configured as default parameter to $remove_packages in init.pp
   # handling of special behaviour of centos7, which basically deletes linux-firmware, as dependency of xorg-x11-drv-ati-firmware
   # tickets ASC-188 & DEVOPS-1687
   if ( $::is_virtual ) {
