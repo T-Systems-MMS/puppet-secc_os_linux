@@ -1,5 +1,7 @@
 # CHANGELOG
-## [UNRELEASED]
+## [2.0.0] - 2020-10-04
+* remove explicit calls to hiera
+* rename arguments without ext_
 * extended tests for /etc/profile.d/umask.sh
 
 ## [1.9.0] - 2018-07-23

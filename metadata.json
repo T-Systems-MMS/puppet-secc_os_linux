@@ -1,6 +1,6 @@
 {
   "name": "tsystemsmms-secc_os_linux",
-  "version": "1.9.0",
+  "version": "2.0.0",
   "author": "T-Systems Multimedia Solutions GmbH",
   "summary": "Dieses Modul bietet eine teilweise Abdeckung der SoC Anforderungen für OS unter Linux.",
   "license": "Apache-2.0",
