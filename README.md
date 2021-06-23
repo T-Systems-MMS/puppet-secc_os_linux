@@ -10,6 +10,11 @@
 6. [Limitations - OS compatibility, etc.](#limitations)
 7. [Development - Guide for contributing to the module](#development)
 
+## :warning: Deprecated
+
+This module is deprecated an will no longer be maintained or updated.
+If you still need the functionality, we suggest you use [hardening-os_hardening](https://forge.puppet.com/modules/hardening/os_hardening).
+
 ## Overview
 
 This module provides coverage of the SoC conditions for Linux.
